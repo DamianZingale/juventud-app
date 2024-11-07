@@ -1,0 +1,46 @@
+:root { 
+	--primary-color:  #4a90e2; 
+	--secondary-color: #f5f7fa; 
+	--danger-color: #dc3545;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	min-height: 100vh;
+	color: #333;
+background-color: var(--secondary-color);
+}
+li a{
+	list-style:none !important;
+}
+
+.section-hero {
+	background-image:
+		url("https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+	background-size: cover;
+	background-position: center;
+	height: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.footer {
+      background-color: #1e1e1e !important;
+      color: #f1f1f1;
+      padding: 40px 0;
+      text-align: center;
+    }
+    .icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}

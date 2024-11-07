@@ -1,0 +1,37 @@
+:root {
+	--primary-color: #4a90e2; 
+	--secondary-color: #f5f7fa;
+	--danger-color: #dc3545;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	min-height: 100vh;
+	color: #333;
+	background-color: var(--secondary-color);
+}
+
+.profile-image {
+	width: 128px;
+	height: 128px;
+	object-fit: cover;
+}
+
+.footer {
+      background-color: #1e1e1e;
+      color: #f1f1f1;
+      padding: 40px 0;
+      text-align: center;
+    }
+    .icon {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
