@@ -24,7 +24,7 @@
         <li><a href="agregarStudent.jsp">Agregar nuevo estudiante</a></li>
         <li><a href="localidades.jsp">Casas</a></li>
         <li><a href="planesEstudio.jsp">Planes de estudio</a></li>
-        <li><a href="estudiantesListado.jsp">Ver estudiante</a></li>
+        <li><a href="estudiantesListado.jsp">Ver estudiantes</a></li>
       </ul>
     </div>
     
