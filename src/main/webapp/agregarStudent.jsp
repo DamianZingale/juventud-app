@@ -27,9 +27,11 @@
                 </div>
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="inicioAdmin.jsp">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Perfil Estudiante</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Casas</a></li>
+                        <li class="nav-item"><a class="nav-link" aria-current="page" href="inicioAdmin.jsp">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="agregarStudent.jsp">Agregar Nuevo Estudiante</a></li>
+                        <li class="nav-item"><a class="nav-link" href="localidades.jsp">Casas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="planesEstudio.jsp">Planes de estudio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="estudiantesListado.jsp">Listado de estudiantes</a></li>
                     </ul>
                 </div>
             </div>
@@ -46,7 +48,7 @@
                     <h5 class="card-title mb-0">Información Personal</h5>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form action="tuServletURL" method="POST">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Primer y segundo nombre si corresponde</label>
                             <input type="text" class="form-control" id="nombres" value="Pepe" required>
@@ -141,7 +143,9 @@
                                 }
                             }
                         </script>
-
+					<div class="d-flex justify-content-end">
+       				 <button type="submit" class="btn btn-success mr-2" name="action" value="add">Agregar Estudiante</button>
+   					 </div>
                     </form>
                 </div>
             </div>

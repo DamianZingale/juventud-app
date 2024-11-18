@@ -1,42 +1,43 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css"
-	href="./css/inicioAdmin.css">
-  </head>
-  <body>
-    <title>Bienvenido administrador!</title>
-  
-<!-- ZÛcalo superior -->
-    <div class="welcome-bar">
-      Bienvenido al programa para estudiantes
-    </div>
-    
+    <link rel="stylesheet" type="text/css" href="./css/localidades.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
-    <!-- Contenedor que centraliza los elementos -->
-    <div class="menu-container">
-      <ul class="menu-list">
-        <li><a href="agregarStudent.jsp">Agregar nuevo estudiante</a></li>
-        <li><a href="localidades.jsp">Casas</a></li>
-        <li><a href="planesEstudio.jsp">Planes de estudio</a></li>
-        <li><a href="estudiantesListado.jsp">Ver estudiante</a></li>
-      </ul>
+    <title>Ciudades</title>
+</head>
+<body>
+    <!-- Barra de Bienvenida -->
+    <div class="welcome-bar">
+        Ciudades
     </div>
-    
+
+    <!-- Contenedor del Men√∫ -->
+    <div class="menu-container">
+        <ul class="menu-list">
+            <li><a href="casaAzul.jsp">Azul</a></li>
+            <li><a href="casaOlavarria.jsp">Olavarr√≠a</a></li>
+            <li><a href="casaTandil.jsp">Tandil</a></li>
+            <li><a href="casaLP.jsp">La Plata</a></li>
+        </ul>
+    </div>
+
     <footer class="footer text-center">
     <div class="container">
         <div class="row justify-content-around">
             <!-- Contact Info -->
             <div class="col-md-4">
-                <h5>InformaciÛn de contacto</h5>
+                <h5>Informaci√≥n de contacto</h5>
                 <address>
                     <p>Email: <a href="mailto:example@example.com">example@example.com</a></p>
-                    <p>TelÈfono: <a href="tel:+1234567890">+54 (2281) 567-890</a></p>
+                    <p>Tel√©fono: <a href="tel:+1234567890">+54 (2281) 567-890</a></p>
                 </address>
             </div>
             <!-- Social Media Links -->
@@ -54,6 +55,5 @@
         <p>&copy; 2024 Your Company. All rights reserved.</p>
     </div>
 </footer>
-   
-  </body>
+</body>
 </html>

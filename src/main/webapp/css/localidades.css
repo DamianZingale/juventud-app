@@ -1,7 +1,6 @@
 :root {
     --primary-color: #4a90e2;
     --secondary-color: #f5f7fa;
-    --danger-color: #dc3545;
     --text-color: #333;
     --link-hover-color: #3a7bc8;
 }
@@ -21,7 +20,7 @@ body {
     font-family: 'Arial', sans-serif;
 }
 
-/* Barra de bienvenida */
+/* Barra de Bienvenida */
 .welcome-bar {
     background-color: var(--primary-color);
     color: white;
@@ -31,34 +30,30 @@ body {
     font-weight: bold;
 }
 
-/* Menú central */
+/* Menú Central */
 .menu-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 120px); /* Ajusta altura para no cubrir la barra */
+    height: calc(100vh - 160px); /* Ajusta altura considerando el footer */
 }
 
 .menu-list {
     list-style: none;
     padding: 0;
     text-align: center;
-    
 }
 
 .menu-list li {
-    margin: 20px 0;
-   
+    margin: 15px 0;
 }
 
 .menu-list a {
     text-decoration: none;
     font-size: 1.2rem;
     color: var(--primary-color);
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 10px 20px;    
     transition: all 0.3s ease-in-out;
-    
 }
 
 .menu-list a:hover {
