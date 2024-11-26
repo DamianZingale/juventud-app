@@ -39,7 +39,7 @@ public class Estudiante extends Usuario {
 	}
 	
 	//constructor vacio
-	public Estudiante(String dNI, String nombre, String apellido, String email, String funcion) {
+	public Estudiante() {
 		super();
 	}
 	

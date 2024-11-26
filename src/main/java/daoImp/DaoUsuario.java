@@ -1,8 +1,18 @@
 package daoImp;
 
+import java.io.IOException;
+
 public class DaoUsuario {
 
-    ConnectionManager cn = new ConnectionManager();
+	ConnectionManager cn;
+
+    public DaoUsuario() {
+        try {
+            cn = new ConnectionManager(); 
+        } catch (IOException e) {
+            e.printStackTrace(); 
+        }
+    }
 
     
 

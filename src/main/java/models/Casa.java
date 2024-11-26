@@ -17,7 +17,7 @@ public class Casa {
 	}
 	
 	//constructor vacio
-	public Casa() {
+	public Casa(int id_casa) {
 	}
 	
 	//getters and setters
