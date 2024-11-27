@@ -13,7 +13,7 @@ public class CargarEnv {
     }
 
     public void ejecutar() {
-        final String path = "/variables.env";
+        final String path = "./variables.env";
         try (BufferedReader archivo = new BufferedReader(new FileReader(path))) {
             String linea;
 
