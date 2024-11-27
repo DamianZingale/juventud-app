@@ -1,6 +1,7 @@
 package servlets;
 
-import daoImp.EstudianteDao;
+import dao.EstudianteDao;
+import daoImp.EstudianteDaoImp;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -92,7 +93,7 @@ public class ServletAgregarStudent extends HttpServlet {
 			e.setEstado(estado);
 
 // creo un nuevo objeto de la clase estudiantedao		    
-			EstudianteDao estudianteDao = new EstudianteDao();
+			EstudianteDao estudianteDao = new EstudianteDaoImp();
 		       
 		    	// Agrego el estudiante a la base de datos
 			try {

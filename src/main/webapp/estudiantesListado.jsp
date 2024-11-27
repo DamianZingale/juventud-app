@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="models.Estudiante"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -17,7 +20,12 @@
     <div class="welcome-bar">
         Estudiantes
     </div>
-
+<%
+	List<Estudiante> listE = new ArrayList<Estudiante>();
+	if (request.getAttribute("listaEst") != null) {
+	listE = (List<Estudiante>) request.getAttribute("listaEst");
+	}
+%>
     <!-- Contenedor Principal -->
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -26,7 +34,7 @@
         </div>
 
         <!-- Tabla de Planes -->
-        <form method="POST" action="gestionarEstudiantes">
+        <form method="GET" action="ServletestudiantesListado">
             <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
@@ -36,6 +44,19 @@
                         <th scope="col">Dni</th>
                         <th scope="col">Nombre de la Carrera que cursa</th>
                     </tr>
+                    <%
+                    	for(Estudiante e : listE) {
+                    %>
+                    <tr>
+                    	<th scope="col"></th>
+                    	<th scope="col"><% e.getNombre(); %></th>
+                    	<th scope="col"><% e.getApellido(); %></th>
+                    	<th scope="col"><% e.getDNI(); %></th>
+                    	<th scope="col"></th>
+                    </tr>
+                    <%
+                    	}
+                    %>
                 </thead>
 
             </table>

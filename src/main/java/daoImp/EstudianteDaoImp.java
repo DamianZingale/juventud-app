@@ -1,21 +1,24 @@
 package daoImp;
 
+import java.io.IOException;
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.io.IOException;  
+import java.util.ArrayList;
+import java.util.List;
 
+import dao.EstudianteDao;
 import models.Estudiante;
 
-public class EstudianteDao {
-    
+public class EstudianteDaoImp implements EstudianteDao {
+
     ConnectionManager cn = null;
     PreparedStatement ps = null; 
     ResultSet rs = null;
     
-    public EstudianteDao() {
+    public EstudianteDaoImp() {
         try {
             cn = new ConnectionManager();
         } catch (IOException e) {
@@ -93,5 +96,36 @@ public class EstudianteDao {
             }
         }
         return false; 
+    }
+    
+    public List<Estudiante> obtenerTodos()
+    {
+    	ResultSet rs = null;
+    	Connection conexion = null;
+    	List<Estudiante> listE = new ArrayList<Estudiante>();
+    	try
+		 {
+    		 conexion = cn.connect();
+			 rs= cn.query("Select nombre, apellido, DNI from estudiante");
+			 while(rs.next())
+			 {
+				 Estudiante E = new Estudiante();
+				 E.setNombre(rs.getString("nombre"));
+				 E.setApellido(rs.getString("apellido"));
+				 E.setDNI(rs.getString("DNI"));
+				 
+				 listE.add(E);
+			 }
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.closeConnection();;
+		 }
+		 return listE;
     }
 }
