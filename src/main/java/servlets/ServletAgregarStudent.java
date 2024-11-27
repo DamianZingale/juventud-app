@@ -57,7 +57,7 @@ public class ServletAgregarStudent extends HttpServlet {
 		    }
 
 		    if (email == null || !email.matches("[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}")) {
-		        errores.append("El email no es v�lido.<br>");
+		        errores.append("El email no es valido.<br>");
 		        valido = false;
 		    }
 		    if (username == null || username.trim().isEmpty()) {
@@ -75,7 +75,9 @@ public class ServletAgregarStudent extends HttpServlet {
 		        return;
 		    }
 		    
-		    Casa casa = new Casa(casaSeleccionada);
+		    Casa casa = new Casa(casaSeleccionada);//ACA HAY QUE HACER UNA FUNCION QUE CARGUE LOS DATOS DE LA CASA SELECCIONADA ASI SE GUARDA EN EL OBJETO.
+		    										//PORQUE SOLO SE INICIA UNA CASA CON UN NUMERO, PERO SIN LOS DEMAS DATOS
+		    										
 // creo el objeto Estudiante		    
 		    Estudiante e = new Estudiante();
 

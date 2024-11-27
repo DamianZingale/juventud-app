@@ -48,7 +48,7 @@
                     <h5 class="card-title mb-0">Información Personal</h5>
                 </div>
                 <div class="card-body">
-                    <form action="tuServletURL" method="POST">
+                    <form action="ServletAgregarStudent" method="get">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Primer y segundo nombre si corresponde</label>
                             <input type="text" class="form-control" id="nombres" value="Pepe" required>
