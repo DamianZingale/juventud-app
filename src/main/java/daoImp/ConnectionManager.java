@@ -8,12 +8,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class ConnectionManager {
+	static {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("Error al cargar el driver JDBC", e);
+        }
+    }
     private ArrayList<String> variables;
-    private String host;
-    private String user;
-    private String password;
+    private String host = "jdbc:mysql://localhost:3306/db_juventud?useSSL=false";
+    private String user = "root";
+    private String password = "root";
     private Connection cn;
-
+/*
     public ConnectionManager() throws IOException {
     try {
         CargarEnv cargarEnv = new CargarEnv();
@@ -38,7 +45,7 @@ public class ConnectionManager {
         System.err.println("Ocurrió un error inesperado: " + e.getMessage());
     }
 }
-
+*/
     public Connection connect() {
         try {
             cn = DriverManager.getConnection(host, user, password);

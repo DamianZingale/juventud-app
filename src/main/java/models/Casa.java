@@ -20,6 +20,10 @@ public class Casa {
 	public Casa(int id_casa) {
 	}
 	
+	public Casa() {
+		// TODO Auto-generated constructor stub
+	}
+
 	//getters and setters
 	public int getId_casa() {
 		return id_casa;

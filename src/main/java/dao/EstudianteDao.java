@@ -3,7 +3,9 @@ package dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import models.Casa;
 import models.Estudiante;
+import models.Plan_Estudios;
 
 public interface EstudianteDao {
     
@@ -12,4 +14,12 @@ public interface EstudianteDao {
     public boolean existeDni(String dni) throws SQLException;
     
     public List<Estudiante> obtenerTodos();
+    
+    public List<Casa> obtenerCasas();
+    
+    public List<Plan_Estudios> obtenerPlan_Estudios();
+    
+    public Estudiante ObtenerEstudiante(String id);
+    
+    public void ejecutarSPBajaEstudiante(String id) throws SQLException;
 }

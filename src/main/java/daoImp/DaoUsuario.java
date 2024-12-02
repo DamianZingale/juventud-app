@@ -7,11 +7,7 @@ public class DaoUsuario {
 	ConnectionManager cn;
 
     public DaoUsuario() {
-        try {
-            cn = new ConnectionManager(); 
-        } catch (IOException e) {
-            e.printStackTrace(); 
-        }
+        cn = new ConnectionManager();
     }
 
     

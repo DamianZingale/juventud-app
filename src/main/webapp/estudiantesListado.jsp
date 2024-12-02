@@ -1,6 +1,8 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="models.Estudiante"%>
+<%@page import="models.Casa"%>
+<%@page import="models.Plan_Estudios"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -14,6 +16,26 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="./css/planesEstudio.css">
+    <link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#table_id').DataTable();
+	});
+</script>
+<script type="text/javascript">
+function PopUp(id) {
+  if (confirm("Desea dar baja a este estudiante?")) {
+	window.location.href = 'ServletestudiantesListado?btn=3&Id=' + id.toString();
+  }
+}
+</script>
 </head>
 <body>
     <!-- Barra de Bienvenida -->
@@ -22,8 +44,12 @@
     </div>
 <%
 	List<Estudiante> listE = new ArrayList<Estudiante>();
+	List<Casa> listC = new ArrayList<Casa>();
+	List<Plan_Estudios> listP = new ArrayList<Plan_Estudios>();
 	if (request.getAttribute("listaEst") != null) {
 	listE = (List<Estudiante>) request.getAttribute("listaEst");
+	listC = (List<Casa>) request.getAttribute("listaCasas");
+	listP = (List<Plan_Estudios>) request.getAttribute("listaPlanes");
 	}
 %>
     <!-- Contenedor Principal -->
@@ -34,39 +60,41 @@
         </div>
 
         <!-- Tabla de Planes -->
-        <form method="GET" action="ServletestudiantesListado">
-            <table class="table table-hover">
+            <table id="table_id" class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Seleccionar</th>
+                        <th scope="col"></th>
                         <th scope="col">Nombre</th>
                         <th scope="col">Apellido</th>
                         <th scope="col">Dni</th>
                         <th scope="col">Nombre de la Carrera que cursa</th>
+                        <th scope="col">Institucion</th>
+                        <th scope="col">Ciudad</th>
+                        <th scope="col"></th>
                     </tr>
+                </thead>
+                <tbody>     
                     <%
+                    	int x = 0;
                     	for(Estudiante e : listE) {
                     %>
                     <tr>
-                    	<th scope="col"></th>
-                    	<th scope="col"><% e.getNombre(); %></th>
-                    	<th scope="col"><% e.getApellido(); %></th>
-                    	<th scope="col"><% e.getDNI(); %></th>
-                    	<th scope="col"></th>
+                    	<th scope="col"> <button type="submit" class="btn btn-primary" name="btnVerPerfil" onclick="window.location.href='ServletestudiantesListado?btn=2&Id=<%= Integer.toString(e.getId_usuario()) %>'" >Ver perfil</button></th>
+                    	<th scope="col"><%= e.getNombre() %></th>
+                    	<th scope="col"><%= e.getApellido() %></th>
+                    	<th scope="col"><%= e.getDNI() %></th>
+                    	<th scope="col"><%= listP.get(x).getCarrera() %></th>
+                    	<th scope="col"><%= listP.get(x).getInstitucion() %></th>
+                    	<th scope="col"><%= listC.get(x).getCiudad() %></th>
+                		<th scope="col"> <button type="submit" class="btn btn-danger" name="btnDarBaja" onclick="PopUp(<%= Integer.toString(e.getId_usuario())%>)">Dar de baja</button></th>
                     </tr>
                     <%
+                    	x++;
                     	}
                     %>
-                </thead>
-
+   				</tbody>
             </table>
 
-            <!-- Botones de acción -->
-            <div class="d-flex justify-content-end">
-                <button type="submit" class="btn btn-warning mr-2" name="action" value="edit">Editar Seleccionado</button>
-                <button type="submit" class="btn btn-danger" name="action" value="delete">Eliminar Seleccionado</button>
-            </div>
-        </form>
     </div>
 
     <footer class="footer text-center">
