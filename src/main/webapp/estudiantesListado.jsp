@@ -32,7 +32,7 @@
 <script type="text/javascript">
 function PopUp(id) {
   if (confirm("Desea dar baja a este estudiante?")) {
-	window.location.href = 'ServletestudiantesListado?btn=3&Id=' + id.toString();
+	window.location.href = "ServletestudiantesListado?Action=3&Id=" + id.toString();
   }
 }
 </script>
@@ -79,7 +79,7 @@ function PopUp(id) {
                     	for(Estudiante e : listE) {
                     %>
                     <tr>
-                    	<th scope="col"> <button type="submit" class="btn btn-primary" name="btnVerPerfil" onclick="window.location.href='ServletestudiantesListado?btn=2&Id=<%= Integer.toString(e.getId_usuario()) %>'" >Ver perfil</button></th>
+                    	<th scope="col"> <button type="submit" class="btn btn-primary" name="btnVerPerfil" onclick="window.location.href='ServletestudiantesListado?Action=2&Id=<%= Integer.toString(e.getId_usuario()) %>'" >Ver perfil</button></th>
                     	<th scope="col"><%= e.getNombre() %></th>
                     	<th scope="col"><%= e.getApellido() %></th>
                     	<th scope="col"><%= e.getDNI() %></th>

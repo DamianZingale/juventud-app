@@ -70,10 +70,9 @@ public class ServletestudiantesListado extends HttpServlet {
 				{
 					String id = request.getParameter("Id").toString();
 					log.BajaEstudiante(id);
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/estudiantesListado.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("ServletestudiantesListado?Action=1");
 					dispatcher.forward(request, response);
 				}
-				break;
 			}
 			default:
 				break;

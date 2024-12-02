@@ -104,7 +104,7 @@ public class EstudianteDaoImp implements EstudianteDao {
     	try
 		 {
     		 conexion = cn.connect();
-			 rs= cn.query("Select Id_usuario, nombre, apellido, DNI from estudiante WHERE estudiante.estado = 1 AND estudiante.tipo_usuario = 'Estudiante';");
+			 rs= cn.query("Select Id_usuario, nombre, apellido, DNI from usuario WHERE estado = 1 AND tipo_usuario = 'Estudiante';");
 			 while(rs.next())
 			 {
 				 Plan_Estudios p = new Plan_Estudios();
@@ -137,7 +137,7 @@ public class EstudianteDaoImp implements EstudianteDao {
     	try
 		 {
     		 conexion = cn.connect();
-			 rs= cn.query("Select casa.ciudad from estudiante inner join casa  WHERE estudiante.estado = 1 AND estudiante.tipo_usuario = 'Estudiante' AND estudiante.id_casa = casa.id_casa;");
+			 rs= cn.query("Select casa.ciudad from usuario inner join casa  WHERE usuario.estado = 1 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_casa = casa.id_casa;");
 			 while(rs.next())
 			 {
 				 Casa c = new Casa();
@@ -165,7 +165,7 @@ public class EstudianteDaoImp implements EstudianteDao {
     	try
 		 {
     		 conexion = cn.connect();
-			 rs= cn.query("Select plan_estudio.carrera, plan_estudio.institucion from estudiante inner join plan_estudio WHERE estudiante.estado = 1 AND estudiante.tipo_usuario = 'Estudiante' AND estudiante.id_plan = plan_estudio.id_plan;");
+			 rs= cn.query("Select plan_estudio.carrera, plan_estudio.institucion from usuario inner join plan_estudio WHERE usuario.estado = 1 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_plan = plan_estudio.id_plan;");
 			 while(rs.next())
 			 {
 				 Plan_Estudios p = new Plan_Estudios();
