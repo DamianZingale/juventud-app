@@ -68,6 +68,27 @@ public class ServletestudiantesListado extends HttpServlet {
 					RequestDispatcher dispatcher = request.getRequestDispatcher("ServletestudiantesListado?Action=1");
 					dispatcher.forward(request, response);
 				}
+				break;
+			}
+			case "4":
+			{
+				List<EstudianteListado> listE = new ArrayList<EstudianteListado>();
+				listE = log.listarEstudiantesInactivos();
+				request.setAttribute("listaEst", listE);
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/estudiantesListado.jsp");
+				dispatcher.forward(request, response);
+				break;
+			}
+			case "5":
+			{
+				if(request.getParameter("Id")!=null)
+				{
+					String id = request.getParameter("Id").toString();
+					log.AltaEstudiante(id);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("ServletestudiantesListado?Action=1");
+					dispatcher.forward(request, response);
+				}
+				break;
 			}
 			default:
 				break;

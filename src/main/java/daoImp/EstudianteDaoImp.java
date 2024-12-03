@@ -105,7 +105,7 @@ public class EstudianteDaoImp implements EstudianteDao {
     	try
 		 {
     		 conexion = cn.connect();
-			 rs= cn.query("Select usuario.Id_usuario, usuario.nombre, usuario.apellido, usuario.DNI, plan_estudio.carrera, plan_estudio.institucion, casa.ciudad from usuario\r\n" + 
+			 rs= cn.query("Select usuario.Id_usuario, usuario.nombre, usuario.apellido, usuario.DNI, usuario.estado, plan_estudio.carrera, plan_estudio.institucion, casa.ciudad from usuario\r\n" + 
 			 		"inner join plan_estudio \r\n" + 
 			 		"inner join casa  WHERE usuario.estado = 1 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_casa = casa.id_casa AND usuario.id_plan = plan_estudio.id_plan;");
 			 while(rs.next())
@@ -118,6 +118,44 @@ public class EstudianteDaoImp implements EstudianteDao {
 				 e.setCiudad(rs.getString("casa.ciudad"));
 				 e.setCarrera(rs.getString("plan_estudio.carrera"));
 				 e.setInstitución(rs.getString("plan_estudio.institucion"));
+				 e.setEstado(rs.getBoolean("usuario.estado"));
+				 listE.add(e);
+			 }
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.closeConnection();;
+		 }
+		 return listE;
+    }
+    
+    public List<EstudianteListado> obtenerInactivos()
+    {
+    	ResultSet rs = null;
+    	Connection conexion = null;
+    	List<EstudianteListado> listE = new ArrayList<EstudianteListado>();
+    	try
+		 {
+    		 conexion = cn.connect();
+			 rs= cn.query("Select usuario.Id_usuario, usuario.nombre, usuario.apellido, usuario.DNI, usuario.estado, plan_estudio.carrera, plan_estudio.institucion, casa.ciudad from usuario\r\n" + 
+			 		"inner join plan_estudio \r\n" + 
+			 		"inner join casa  WHERE usuario.estado = 0 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_casa = casa.id_casa AND usuario.id_plan = plan_estudio.id_plan;");
+			 while(rs.next())
+			 {
+				 EstudianteListado e = new EstudianteListado();
+				 e.setId_usuario(rs.getInt("usuario.Id_usuario"));
+				 e.setNombre(rs.getString("usuario.nombre"));
+				 e.setApellido(rs.getString("usuario.apellido"));
+				 e.setDNI(rs.getString("usuario.DNI"));
+				 e.setCiudad(rs.getString("casa.ciudad"));
+				 e.setCarrera(rs.getString("plan_estudio.carrera"));
+				 e.setInstitución(rs.getString("plan_estudio.institucion"));
+				 e.setEstado(rs.getBoolean("usuario.estado"));
 				 listE.add(e);
 			 }
 			 
@@ -169,6 +207,34 @@ public class EstudianteDaoImp implements EstudianteDao {
             conexion = cn.connect(); 
 
             cst = conexion.prepareCall("CALL BajaEstudiante(?)");
+            cst.setString(1, id);
+            cst.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; 
+        } finally {
+            try {
+                if (cst != null) {
+                    cst.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void ejecutarSPAltaEstudiante(String id) throws SQLException { 
+        CallableStatement cst = null;
+        Connection conexion = null; 
+
+        try {
+            conexion = cn.connect(); 
+
+            cst = conexion.prepareCall("CALL AltaEstudiante(?)");
             cst.setString(1, id);
             cst.execute();
 

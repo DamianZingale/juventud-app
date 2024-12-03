@@ -2,18 +2,19 @@ package models;
 
 public class EstudianteListado {
 	
-	int Id_usuario;
-	String nombre;
-	String apellido;
-	String DNI;
-	String Carrera;
-	String Institución;
-	String Ciudad;
+	private int Id_usuario;
+	private String nombre;
+	private String apellido;
+	private String DNI;
+	private String Carrera;
+	private String Institución;
+	private String Ciudad;
+	private boolean Estado;
 	
 	public EstudianteListado() {}
 
 	public EstudianteListado(int id_usuario, String nombre, String apellido, String dNI, String carrera,
-			String institución, String ciudad) {
+			String institución, String ciudad, boolean estado) {
 		super();
 		Id_usuario = id_usuario;
 		this.nombre = nombre;
@@ -22,6 +23,7 @@ public class EstudianteListado {
 		Carrera = carrera;
 		Institución = institución;
 		Ciudad = ciudad;
+		Estado = estado;
 	}
 
 	public int getId_usuario() {
@@ -79,7 +81,15 @@ public class EstudianteListado {
 	public void setCiudad(String ciudad) {
 		Ciudad = ciudad;
 	}
-	
 
+	public boolean isEstado() {
+		return Estado;
+	}
+
+	public void setEstado(boolean estado) {
+		Estado = estado;
+	}
+
+	
 	
 }

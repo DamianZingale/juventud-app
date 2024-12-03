@@ -36,6 +36,13 @@ function PopUp(id) {
   }
 }
 </script>
+<script type="text/javascript">
+function PopUp2(id) {
+  if (confirm("Desea dar de alta a este estudiante?")) {
+	window.location.href = "ServletestudiantesListado?Action=5&Id=" + id.toString();
+  }
+}
+</script>
 </head>
 <body>
     <!-- Barra de Bienvenida -->
@@ -53,6 +60,10 @@ function PopUp(id) {
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h2 class="text-primary">Listado de Estudiantes</h2>
             <button class="btn btn-primary" onclick="window.location.href='agregarStudent.jsp'">Agregar un nuevo estudiante</button>
+        </div>
+        <div>
+        	<button class="btn btn-primary" onclick="window.location.href='ServletestudiantesListado?Action=1'">Mostrar estudiante activos</button>
+        	<button class="btn btn-primary" onclick="window.location.href='ServletestudiantesListado?Action=4'">Mostrar estudiante inactivos</button>
         </div>
 
         <!-- Tabla de Planes -->
@@ -81,7 +92,20 @@ function PopUp(id) {
                     	<th scope="col"><%= e.getCarrera() %></th>
                     	<th scope="col"><%= e.getInstitución() %></th>
                     	<th scope="col"><%= e.getCiudad() %></th>
+                    	<%
+                    		if(e.isEstado())
+                    		{
+                    	%>
                 		<th scope="col"> <button type="submit" class="btn btn-danger" name="btnDarBaja" onclick="PopUp(<%= Integer.toString(e.getId_usuario())%>)">Dar de baja</button></th>
+                		<%
+                    		}
+                    		else
+                    		{
+                		%>
+                		<th scope="col"> <button type="submit" class="btn btn-danger" name="btnDarBaja" onclick="PopUp2(<%= Integer.toString(e.getId_usuario())%>)">Dar de alta</button></th>
+                		<%
+                    		}
+                		%>
                     </tr>
                     <%
                     	}

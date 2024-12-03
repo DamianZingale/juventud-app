@@ -16,7 +16,11 @@ public interface EstudianteDao {
     
     public List<EstudianteListado> obtenerTodos();
     
+    public List<EstudianteListado> obtenerInactivos();
+    
     public Estudiante ObtenerEstudiante(String id);
     
     public void ejecutarSPBajaEstudiante(String id) throws SQLException;
+    
+    public void ejecutarSPAltaEstudiante(String id) throws SQLException;
 }

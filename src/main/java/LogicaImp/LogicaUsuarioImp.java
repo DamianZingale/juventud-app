@@ -20,6 +20,10 @@ public class LogicaUsuarioImp implements LogicaUsuario {
 		return (ArrayList<EstudianteListado>) dao.obtenerTodos();
 	}
 	
+	public ArrayList<EstudianteListado> listarEstudiantesInactivos() {
+		return (ArrayList<EstudianteListado>) dao.obtenerInactivos();
+	}
+	
 	public Estudiante ObtenerEstudiante(String id)
 	{
 		return dao.ObtenerEstudiante(id);
@@ -29,6 +33,15 @@ public class LogicaUsuarioImp implements LogicaUsuario {
 	{
 		try {
 			dao.ejecutarSPBajaEstudiante(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void AltaEstudiante(String id)
+	{
+		try {
+			dao.ejecutarSPAltaEstudiante(id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -13,7 +13,11 @@ public interface LogicaUsuario {
 
 	public ArrayList<EstudianteListado> listarEstudiantes();
 	
+	public ArrayList<EstudianteListado> listarEstudiantesInactivos();
+	
 	public Estudiante ObtenerEstudiante(String id);
 	
 	public void BajaEstudiante(String id);
+	
+	public void AltaEstudiante(String id);
 }
