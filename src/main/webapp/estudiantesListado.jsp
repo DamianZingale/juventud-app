@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="models.Estudiante"%>
+<%@page import="models.EstudianteListado"%>
 <%@page import="models.Casa"%>
 <%@page import="models.Plan_Estudios"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -43,13 +43,9 @@ function PopUp(id) {
         Estudiantes
     </div>
 <%
-	List<Estudiante> listE = new ArrayList<Estudiante>();
-	List<Casa> listC = new ArrayList<Casa>();
-	List<Plan_Estudios> listP = new ArrayList<Plan_Estudios>();
+	List<EstudianteListado> listE = new ArrayList<EstudianteListado>();
 	if (request.getAttribute("listaEst") != null) {
-	listE = (List<Estudiante>) request.getAttribute("listaEst");
-	listC = (List<Casa>) request.getAttribute("listaCasas");
-	listP = (List<Plan_Estudios>) request.getAttribute("listaPlanes");
+	listE = (List<EstudianteListado>) request.getAttribute("listaEst");
 	}
 %>
     <!-- Contenedor Principal -->
@@ -75,21 +71,19 @@ function PopUp(id) {
                 </thead>
                 <tbody>     
                     <%
-                    	int x = 0;
-                    	for(Estudiante e : listE) {
+                    	for(EstudianteListado e : listE) {
                     %>
                     <tr>
                     	<th scope="col"> <button type="submit" class="btn btn-primary" name="btnVerPerfil" onclick="window.location.href='ServletestudiantesListado?Action=2&Id=<%= Integer.toString(e.getId_usuario()) %>'" >Ver perfil</button></th>
                     	<th scope="col"><%= e.getNombre() %></th>
                     	<th scope="col"><%= e.getApellido() %></th>
                     	<th scope="col"><%= e.getDNI() %></th>
-                    	<th scope="col"><%= listP.get(x).getCarrera() %></th>
-                    	<th scope="col"><%= listP.get(x).getInstitucion() %></th>
-                    	<th scope="col"><%= listC.get(x).getCiudad() %></th>
+                    	<th scope="col"><%= e.getCarrera() %></th>
+                    	<th scope="col"><%= e.getInstitución() %></th>
+                    	<th scope="col"><%= e.getCiudad() %></th>
                 		<th scope="col"> <button type="submit" class="btn btn-danger" name="btnDarBaja" onclick="PopUp(<%= Integer.toString(e.getId_usuario())%>)">Dar de baja</button></th>
                     </tr>
                     <%
-                    	x++;
                     	}
                     %>
    				</tbody>

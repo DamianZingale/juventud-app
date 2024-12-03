@@ -9,24 +9,15 @@ import dao.EstudianteDao;
 import daoImp.EstudianteDaoImp;
 import models.Casa;
 import models.Estudiante;
+import models.EstudianteListado;
 import models.Plan_Estudios;
 
 public class LogicaUsuarioImp implements LogicaUsuario {
 
 	private EstudianteDao dao = new EstudianteDaoImp();
 	
-	public ArrayList<Estudiante> listarEstudiantes() {
-		return (ArrayList<Estudiante>) dao.obtenerTodos();
-	}
-	
-	public ArrayList<Casa> obtenerCasasEstudiantes()
-	{
-		return (ArrayList<Casa>) dao.obtenerCasas();
-	}
-	
-	public ArrayList<Plan_Estudios> obtenerPlan_EstudiosEstudiantes()
-	{
-		return (ArrayList<Plan_Estudios>) dao.obtenerPlan_Estudios();
+	public ArrayList<EstudianteListado> listarEstudiantes() {
+		return (ArrayList<EstudianteListado>) dao.obtenerTodos();
 	}
 	
 	public Estudiante ObtenerEstudiante(String id)

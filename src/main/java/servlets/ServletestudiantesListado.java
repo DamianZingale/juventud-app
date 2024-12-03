@@ -15,6 +15,7 @@ import Logica.LogicaUsuario;
 import LogicaImp.LogicaUsuarioImp;
 import models.Casa;
 import models.Estudiante;
+import models.EstudianteListado;
 import models.Plan_Estudios;
 
 
@@ -38,15 +39,9 @@ public class ServletestudiantesListado extends HttpServlet {
 			switch (opcion) {
 			case "1":
 			{
-				List<Estudiante> listE = new ArrayList<Estudiante>();
-				List<Casa> listC = new ArrayList<Casa>();
-				List<Plan_Estudios> listP = new ArrayList<Plan_Estudios>();
+				List<EstudianteListado> listE = new ArrayList<EstudianteListado>();
 				listE = log.listarEstudiantes();
-				listC = log.obtenerCasasEstudiantes();
-				listP = log.obtenerPlan_EstudiosEstudiantes();
 				request.setAttribute("listaEst", listE);
-				request.setAttribute("listaCasas", listC);
-				request.setAttribute("listaPlanes", listP);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/estudiantesListado.jsp");
 				dispatcher.forward(request, response);
 				break;

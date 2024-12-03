@@ -5,6 +5,7 @@ import java.util.List;
 
 import models.Casa;
 import models.Estudiante;
+import models.EstudianteListado;
 import models.Plan_Estudios;
 
 public interface EstudianteDao {
@@ -13,11 +14,7 @@ public interface EstudianteDao {
 
     public boolean existeDni(String dni) throws SQLException;
     
-    public List<Estudiante> obtenerTodos();
-    
-    public List<Casa> obtenerCasas();
-    
-    public List<Plan_Estudios> obtenerPlan_Estudios();
+    public List<EstudianteListado> obtenerTodos();
     
     public Estudiante ObtenerEstudiante(String id);
     

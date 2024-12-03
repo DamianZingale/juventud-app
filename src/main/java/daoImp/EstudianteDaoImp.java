@@ -12,6 +12,7 @@ import java.util.List;
 import dao.EstudianteDao;
 import models.Casa;
 import models.Estudiante;
+import models.EstudianteListado;
 import models.Plan_Estudios;
 
 public class EstudianteDaoImp implements EstudianteDao {
@@ -96,24 +97,27 @@ public class EstudianteDaoImp implements EstudianteDao {
         return false; 
     }
     
-    public List<Estudiante> obtenerTodos()
+    public List<EstudianteListado> obtenerTodos()
     {
     	ResultSet rs = null;
     	Connection conexion = null;
-    	List<Estudiante> listE = new ArrayList<Estudiante>();
+    	List<EstudianteListado> listE = new ArrayList<EstudianteListado>();
     	try
 		 {
     		 conexion = cn.connect();
-			 rs= cn.query("Select Id_usuario, nombre, apellido, DNI from usuario WHERE estado = 1 AND tipo_usuario = 'Estudiante';");
+			 rs= cn.query("Select usuario.Id_usuario, usuario.nombre, usuario.apellido, usuario.DNI, plan_estudio.carrera, plan_estudio.institucion, casa.ciudad from usuario\r\n" + 
+			 		"inner join plan_estudio \r\n" + 
+			 		"inner join casa  WHERE usuario.estado = 1 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_casa = casa.id_casa AND usuario.id_plan = plan_estudio.id_plan;");
 			 while(rs.next())
 			 {
-				 Plan_Estudios p = new Plan_Estudios();
-				 Casa c = new Casa();
-				 Estudiante e = new Estudiante();
-				 e.setId_usuario(rs.getInt("Id_usuario"));
-				 e.setNombre(rs.getString("nombre"));
-				 e.setApellido(rs.getString("apellido"));
-				 e.setDNI(rs.getString("DNI"));
+				 EstudianteListado e = new EstudianteListado();
+				 e.setId_usuario(rs.getInt("usuario.Id_usuario"));
+				 e.setNombre(rs.getString("usuario.nombre"));
+				 e.setApellido(rs.getString("usuario.apellido"));
+				 e.setDNI(rs.getString("usuario.DNI"));
+				 e.setCiudad(rs.getString("casa.ciudad"));
+				 e.setCarrera(rs.getString("plan_estudio.carrera"));
+				 e.setInstitución(rs.getString("plan_estudio.institucion"));
 				 listE.add(e);
 			 }
 			 
@@ -129,62 +133,6 @@ public class EstudianteDaoImp implements EstudianteDao {
 		 return listE;
     }
     
-    public List<Casa> obtenerCasas()
-    {
-    	ResultSet rs = null;
-    	Connection conexion = null;
-    	List<Casa> listC = new ArrayList<Casa>();
-    	try
-		 {
-    		 conexion = cn.connect();
-			 rs= cn.query("Select casa.ciudad from usuario inner join casa  WHERE usuario.estado = 1 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_casa = casa.id_casa;");
-			 while(rs.next())
-			 {
-				 Casa c = new Casa();
-				 c.setCiudad(rs.getString("casa.ciudad"));
-				 listC.add(c);
-			 }
-			 
-		 }
-		 catch(Exception e)
-		 {
-			 e.printStackTrace();
-		 }
-		 finally
-		 {
-			 cn.closeConnection();;
-		 }
-		 return listC;
-    }
-    
-    public List<Plan_Estudios> obtenerPlan_Estudios()
-    {
-    	ResultSet rs = null;
-    	Connection conexion = null;
-    	List<Plan_Estudios> listP = new ArrayList<Plan_Estudios>();
-    	try
-		 {
-    		 conexion = cn.connect();
-			 rs= cn.query("Select plan_estudio.carrera, plan_estudio.institucion from usuario inner join plan_estudio WHERE usuario.estado = 1 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_plan = plan_estudio.id_plan;");
-			 while(rs.next())
-			 {
-				 Plan_Estudios p = new Plan_Estudios();
-				 p.setCarrera(rs.getString("plan_estudio.carrera"));
-				 p.setInstitucion(rs.getString("plan_estudio.institucion"));
-				 listP.add(p);
-			 }
-			 
-		 }
-		 catch(Exception e)
-		 {
-			 e.printStackTrace();
-		 }
-		 finally
-		 {
-			 cn.closeConnection();;
-		 }
-		 return listP;
-    }
     
     public Estudiante ObtenerEstudiante(String id)
     {
