@@ -46,4 +46,12 @@ public class LogicaUsuarioImp implements LogicaUsuario {
 			e.printStackTrace();
 		}
 	}
+	
+	public boolean ComprobarInicio(String usuario, String contrasenia) {
+		
+		boolean inicio = false;
+		
+		return inicio;
+		
+	}
 }
