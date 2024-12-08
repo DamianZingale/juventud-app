@@ -1,8 +1,6 @@
-<%@page import="java.util.List"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="models.Ciudad"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,45 +12,29 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 
-    <title>Ciudades</title>
+    <title>Informes</title>
 </head>
 <body>
     <!-- Barra de Bienvenida -->
     <div class="welcome-bar">
-        Ciudades
+        Informes
     </div>
-<%
-	List<Ciudad> listC = new ArrayList<Ciudad>();
-	if (request.getAttribute("listaCiu") != null) {
-	listC = (List<Ciudad>) request.getAttribute("listaCiu");
-	}
-%>
-    <!-- Contenedor del MenÃº -->
+    <!-- Contenedor del Menú -->
     <div class="menu-container">
         <ul class="menu-list">
-        <%
-        	for(Ciudad C : listC)
-        	{
-        %>
-            <li><a href="ServletCasas?Action=2&Id=<%= C.getId_ciudad() %>"><%= C.getNombre_ciudad() %></a></li>
-        <%
-        	}
-        %>
+            <li><a href="ServletInformes?Action=1"> Disponibilidad de las casas</a></li>
+            <li><a href=""> Porcentajes de aprobacion de los estudiantes</a></li>
         </ul>
     </div>
-
-	<div class="menu-container">
-			<button type="submit" class="btn btn-primary" onclick="window.location.href = 'AgregarCiudad.jsp'">Agregar nueva ciudad</button>
-	</div>
     <footer class="footer text-center">
     <div class="container">
         <div>
             <!-- Contact Info -->
             <div class="col-md-4">
-                <h5>InformaciÃ³n de contacto</h5>
+                <h5>Información de contacto</h5>
                 <address>
                     <p>Email: <a href="mailto:example@example.com">example@example.com</a></p>
-                    <p>TelÃ©fono: <a href="tel:+1234567890">+54 (2281) 567-890</a></p>
+                    <p>Teléfono: <a href="tel:+1234567890">+54 (2281) 567-890</a></p>
                 </address>
             </div>
             <!-- Social Media Links -->

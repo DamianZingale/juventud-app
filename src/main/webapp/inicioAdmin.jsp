@@ -22,8 +22,9 @@
     <div class="menu-container">
       <ul class="menu-list">
         <li><a href="agregarStudent.jsp">Agregar nuevo estudiante</a></li>
-        <li><a href="localidades.jsp">Casas</a></li>
+        <li><a href="ServletCasas?Action=1">Casas</a></li>
         <li><a href="planesEstudio.jsp">Planes de estudio</a></li>
+        <li><a href="informes.jsp">Informes</a></li>
         <li><a href="ServletestudiantesListado?Action=1">Ver estudiantes</a></li>
       </ul>
     </div>

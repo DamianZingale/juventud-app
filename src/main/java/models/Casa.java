@@ -5,11 +5,12 @@ public class Casa {
 	private int id_casa;
 	private String nombre_casa;
 	private String direccion;
-	private String ciudad;
 	private int capacidad;
 	
+	private Ciudad ciudad;
+	
 	//constructor con parametros
-	public Casa(String nombre_casa, String direccion, String ciudad, int capacidad) {
+	public Casa(String nombre_casa, String direccion, Ciudad ciudad, int capacidad) {
 		this.nombre_casa = nombre_casa;
 		this.direccion = direccion;
 		this.ciudad = ciudad;
@@ -43,10 +44,10 @@ public class Casa {
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-	public String getCiudad() {
+	public Ciudad getCiudad() {
 		return ciudad;
 	}
-	public void setCiudad(String ciudad) {
+	public void setCiudad(Ciudad ciudad) {
 		this.ciudad = ciudad;
 	}
 	public int getCapacidad() {

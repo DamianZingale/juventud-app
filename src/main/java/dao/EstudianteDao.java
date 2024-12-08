@@ -23,4 +23,5 @@ public interface EstudianteDao {
     public void ejecutarSPBajaEstudiante(String id) throws SQLException;
     
     public void ejecutarSPAltaEstudiante(String id) throws SQLException;
+    
 }

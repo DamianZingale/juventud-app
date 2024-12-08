@@ -105,9 +105,10 @@ public class EstudianteDaoImp implements EstudianteDao {
     	try
 		 {
     		 conexion = cn.connect();
-			 rs= cn.query("Select usuario.Id_usuario, usuario.nombre, usuario.apellido, usuario.DNI, usuario.estado, plan_estudio.carrera, plan_estudio.institucion, casa.ciudad from usuario\r\n" + 
+			 rs= cn.query("Select usuario.Id_usuario, usuario.nombre, usuario.apellido, usuario.DNI, usuario.mail, usuario.telefono, usuario.estado, plan_estudio.carrera, plan_estudio.institucion, ciudad.nombre_ciudad from usuario\r\n" + 
 			 		"inner join plan_estudio \r\n" + 
-			 		"inner join casa  WHERE usuario.estado = 1 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_casa = casa.id_casa AND usuario.id_plan = plan_estudio.id_plan;");
+			 		"inner join casa  \r\n" + 
+			 		"inner join ciudad WHERE usuario.estado = 1 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_casa = casa.id_casa AND casa.id_ciudad = ciudad.id_ciudad AND usuario.id_plan = plan_estudio.id_plan;");
 			 while(rs.next())
 			 {
 				 EstudianteListado e = new EstudianteListado();
@@ -115,7 +116,9 @@ public class EstudianteDaoImp implements EstudianteDao {
 				 e.setNombre(rs.getString("usuario.nombre"));
 				 e.setApellido(rs.getString("usuario.apellido"));
 				 e.setDNI(rs.getString("usuario.DNI"));
-				 e.setCiudad(rs.getString("casa.ciudad"));
+				 e.setCorreo(rs.getString("usuario.mail"));
+				 e.setTelefono(rs.getString("usuario.telefono"));
+				 e.setCiudad(rs.getString("ciudad.nombre_ciudad"));
 				 e.setCarrera(rs.getString("plan_estudio.carrera"));
 				 e.setInstitución(rs.getString("plan_estudio.institucion"));
 				 e.setEstado(rs.getBoolean("usuario.estado"));
@@ -142,9 +145,10 @@ public class EstudianteDaoImp implements EstudianteDao {
     	try
 		 {
     		 conexion = cn.connect();
-			 rs= cn.query("Select usuario.Id_usuario, usuario.nombre, usuario.apellido, usuario.DNI, usuario.estado, plan_estudio.carrera, plan_estudio.institucion, casa.ciudad from usuario\r\n" + 
+			 rs= cn.query("Select usuario.Id_usuario, usuario.nombre, usuario.apellido, usuario.DNI, usuario.mail, usuario.telefono, usuario.estado, plan_estudio.carrera, plan_estudio.institucion, ciudad.nombre_ciudad from usuario\r\n" + 
 			 		"inner join plan_estudio \r\n" + 
-			 		"inner join casa  WHERE usuario.estado = 0 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_casa = casa.id_casa AND usuario.id_plan = plan_estudio.id_plan;");
+			 		"inner join casa  \r\n" + 
+			 		"inner join ciudad WHERE usuario.estado = 0 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_casa = casa.id_casa AND casa.id_ciudad = ciudad.id_ciudad AND usuario.id_plan = plan_estudio.id_plan;");
 			 while(rs.next())
 			 {
 				 EstudianteListado e = new EstudianteListado();
@@ -152,7 +156,9 @@ public class EstudianteDaoImp implements EstudianteDao {
 				 e.setNombre(rs.getString("usuario.nombre"));
 				 e.setApellido(rs.getString("usuario.apellido"));
 				 e.setDNI(rs.getString("usuario.DNI"));
-				 e.setCiudad(rs.getString("casa.ciudad"));
+				 e.setCorreo(rs.getString("usuario.mail"));
+				 e.setTelefono(rs.getString("usuario.telefono"));
+				 e.setCiudad(rs.getString("ciudad.nombre_ciudad"));
 				 e.setCarrera(rs.getString("plan_estudio.carrera"));
 				 e.setInstitución(rs.getString("plan_estudio.institucion"));
 				 e.setEstado(rs.getBoolean("usuario.estado"));
@@ -254,5 +260,6 @@ public class EstudianteDaoImp implements EstudianteDao {
             }
         }
     }
-
+    
+    
 }

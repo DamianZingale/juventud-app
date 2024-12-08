@@ -1,62 +1,81 @@
-<!doctype html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Casas en Azul</title>
+    <title>Agregar Ciudades</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="stylesheet" type="text/css"
 	href="./css/casasAzul.css">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+	
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+	
+<script type="text/javascript">
+function PopUp() {
+  confirm("La ciudad ingresada ya existe");
+  window.location.href = "AgregarCiudad.jsp";
+}
+</script>
+<script type="text/javascript">
+function PopUp2() {
+  confirm("Ciudad ingresada exitosamente");
+  window.location.href = "ServletCasas?Action=1";
+}
+</script>
   </head>
   <body>
+<%
+	String id;
+	if (request.getAttribute("PopUp") != null) {
+		
+		id = request.getAttribute("PopUp").toString();
+		switch (id) {
+		case "1":
+		{
+		%>
+			<script type="text/javascript">
+			PopUp();
+			</script>
+		<%
+			break;
+		}
+		case "2":
+		{
+		%>
+			<script type="text/javascript">
+			PopUp2();
+			</script>
+		<%
+			break;
+		}
+		default:
+			break;
+		}
+	}
+%>
 <div class="container">
     <div class="card">
         <div class="card-header">
-            Casas en Olavarria
+            Agregar Ciudad
         </div>
+
         <div class="card-body">
-            <form method="post" action="CasasServlet">
+        <form method="get" action="ServletCasas">
                 <div class="form-group">
-                    <label for="casaId">Seleccione una casa:</label>
-                    <select name="casaId" id="casaId" class="form-control">
-                        <option value="1">Casa 1 - Siempre Viva</option>
-                        <option value="2">Casa 2 - Washintong</option>
-                        <option value="3">Casa 3 - Menfis</option>
-                        <option value="4">Casa 4 - Puto el que Lee (te kbio)</option>
-                    </select>
+                    <label for="casaId">Ingrese el nombre:</label>
+                    <input type="text" class="form-control" name="txtNombre">
                 </div>
-                <button type="submit" class="btn btn-primary">Mostrar Integrantes</button>
-            </form>
-
-            <c:if test="${not empty integrantes}">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Nombre y Apellido</th>
-                        <th>DNI</th>
-                        <th>Carrera Cursando</th>
-                        <th>Años en Curso</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach var="persona" items="${integrantes}">
-                        <tr>
-                            <td>${persona.nombre}</td>
-                            <td>${persona.dni}</td>
-                            <td>${persona.carrera}</td>
-                            <td>${persona.años}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table>
-            </c:if>
-
-            <c:if test="${empty integrantes}">
-                <p class="text-danger">Esta casa está vacía.</p>
-            </c:if>
+                <button type="submit" class="btn btn-primary" name="Action" value="3">Agregar Ciudad</button>
+       </form>
         </div>
     </div>
 </div>

@@ -6,6 +6,8 @@ public class EstudianteListado {
 	private String nombre;
 	private String apellido;
 	private String DNI;
+	private String correo;
+	private String telefono;
 	private String Carrera;
 	private String Institución;
 	private String Ciudad;
@@ -13,13 +15,15 @@ public class EstudianteListado {
 	
 	public EstudianteListado() {}
 
-	public EstudianteListado(int id_usuario, String nombre, String apellido, String dNI, String carrera,
-			String institución, String ciudad, boolean estado) {
+	public EstudianteListado(int id_usuario, String nombre, String apellido, String dNI, String correo, String telefono,
+			String carrera, String institución, String ciudad, boolean estado) {
 		super();
 		Id_usuario = id_usuario;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		DNI = dNI;
+		this.correo = correo;
+		this.telefono = telefono;
 		Carrera = carrera;
 		Institución = institución;
 		Ciudad = ciudad;
@@ -58,6 +62,22 @@ public class EstudianteListado {
 		DNI = dNI;
 	}
 
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
+	}
+
+	public String getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
 	public String getCarrera() {
 		return Carrera;
 	}
@@ -90,6 +110,7 @@ public class EstudianteListado {
 		Estado = estado;
 	}
 
+	
 	
 	
 }
