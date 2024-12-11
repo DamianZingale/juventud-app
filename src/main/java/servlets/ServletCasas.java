@@ -42,7 +42,7 @@ public class ServletCasas extends HttpServlet {
 				List<Ciudad> listC = new ArrayList<Ciudad>();
 				listC = log.ObtenerCiudades();
 				request.setAttribute("listaCiu", listC);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/localidades.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("localidades.jsp");
 				dispatcher.forward(request, response);
 				break;
 			}
@@ -55,7 +55,7 @@ public class ServletCasas extends HttpServlet {
 					listC = log.ObtenerCasasXCiudad(id);
 					request.setAttribute("IdCiudad", id);
 					request.setAttribute("listCasa", listC);	
-					RequestDispatcher dispatcher = request.getRequestDispatcher("/Casa.jsp");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("Casa.jsp");
 					dispatcher.forward(request, response);
 				}
 				break;
@@ -117,6 +117,79 @@ public class ServletCasas extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				break;
+			}
+			case "5":
+			{
+				if(request.getParameter("Id")!=null)
+				{
+					String id = request.getParameter("Id").toString();
+					Casa c = new Casa();
+					c = log.obtenerEstado(id);
+					if(c.isEstado())
+					{
+						try {
+							log.ejecutarSPBajaCasa(id);
+							String idCiudad = request.getParameter("c").toString();
+							List<Casa> listC = new ArrayList<Casa>();
+							listC = log.ObtenerCasasXCiudad(idCiudad);
+							request.setAttribute("listCasa", listC);
+							request.setAttribute("IdCiudad", idCiudad);
+							RequestDispatcher dispatcher = request.getRequestDispatcher("Casa.jsp");
+							dispatcher.forward(request, response);
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					else
+					{
+						String idCiudad = request.getParameter("c").toString();
+						List<Casa> listC = new ArrayList<Casa>();
+						listC = log.ObtenerCasasXCiudad(idCiudad);
+						request.setAttribute("listCasa", listC);
+						request.setAttribute("IdCiudad", idCiudad);
+						RequestDispatcher dispatcher = request.getRequestDispatcher("Casa.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+				break;
+			}
+			case "6":
+			{
+				if(request.getParameter("Id")!=null)
+				{
+					String id = request.getParameter("Id").toString();
+					Casa c = new Casa();
+					c = log.obtenerEstado(id);
+					if(!c.isEstado())
+					{
+						try {
+							log.ejecutarSPAltaCasa(id);
+							String idCiudad = request.getParameter("c").toString();
+							List<Casa> listC = new ArrayList<Casa>();
+							listC = log.ObtenerCasasXCiudad(idCiudad);
+							request.setAttribute("listCasa", listC);
+							request.setAttribute("IdCiudad", idCiudad);
+							RequestDispatcher dispatcher = request.getRequestDispatcher("Casa.jsp");
+							dispatcher.forward(request, response);
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					else
+					{
+						String idCiudad = request.getParameter("c").toString();
+						List<Casa> listC = new ArrayList<Casa>();
+						listC = log.ObtenerCasasXCiudad(idCiudad);
+						request.setAttribute("listCasa", listC);
+						request.setAttribute("IdCiudad", idCiudad);
+						RequestDispatcher dispatcher = request.getRequestDispatcher("Casa.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+				break;
 			}
 			default:
 				break;
@@ -152,6 +225,46 @@ public class ServletCasas extends HttpServlet {
 				request.setAttribute("Ciudad", c);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("/AgregarCasa.jsp");
 				dispatcher.forward(request, response);
+			}
+			else
+			{
+				if(request.getParameter("btnDarBajaCasa") != null)
+				{
+					if(request.getParameter("casaId") != null)
+					{
+						String id = request.getParameter("casaId").toString();
+						String idPop = "1";
+						String idCiudad = request.getParameter("btnDarBajaCasa").toString();
+						List<Casa> listC = new ArrayList<Casa>();
+						listC = log.ObtenerCasasXCiudad(idCiudad);
+						request.setAttribute("listCasa", listC);
+						request.setAttribute("IdCiudad", idCiudad);
+						request.setAttribute("PopUp", idPop);
+						request.setAttribute("Casa", id);
+						RequestDispatcher dispatcher = request.getRequestDispatcher("Casa.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+				else
+				{
+					if(request.getParameter("btnDarAltaCasa") != null)
+					{
+						if(request.getParameter("casaId") != null)
+						{
+							String id = request.getParameter("casaId").toString();
+							String idPop = "2";
+							String idCiudad = request.getParameter("btnDarAltaCasa").toString();
+							List<Casa> listC = new ArrayList<Casa>();
+							listC = log.ObtenerCasasXCiudad(idCiudad);
+							request.setAttribute("listCasa", listC);
+							request.setAttribute("IdCiudad", idCiudad);
+							request.setAttribute("PopUp", idPop);
+							request.setAttribute("Casa", id);
+							RequestDispatcher dispatcher = request.getRequestDispatcher("Casa.jsp");
+							dispatcher.forward(request, response);
+						}
+					}
+				}
 			}
 		}
 	}

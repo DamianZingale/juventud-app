@@ -59,4 +59,19 @@ public class LogicaCasasImp implements LogicaCasas {
 	{
 		return (ArrayList<Casa>)dao.ObtenerCasas();
 	}
+	
+	public Casa obtenerEstado(String id)
+	{
+		return dao.obtenerEstado(id);
+	}
+	
+	public void ejecutarSPBajaCasa(String id) throws SQLException
+	{
+		dao.ejecutarSPBajaCasa(id);
+	}
+	
+	public void ejecutarSPAltaCasa(String id) throws SQLException
+	{
+		dao.ejecutarSPAltaCasa(id);
+	}
 }
