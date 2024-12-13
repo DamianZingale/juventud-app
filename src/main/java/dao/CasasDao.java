@@ -26,4 +26,10 @@ public interface CasasDao {
 	public void ejecutarSPAgregarCasa(Casa C) throws SQLException;
 	
 	public List<Casa> ObtenerCasas();
+	
+	public Casa obtenerEstado(String id);
+	
+	public void ejecutarSPBajaCasa(String id) throws SQLException;
+	
+	public void ejecutarSPAltaCasa(String id) throws SQLException;
 }

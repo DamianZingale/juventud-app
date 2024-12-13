@@ -62,7 +62,7 @@ public class CasasDaoImp implements CasasDao {
     	try
 		 {
    		 conexion = cn.connect();
-		 rs= cn.query("Select id_casa, nombre_casa, domicilio_casa, ciudad.id_ciudad, nombre_ciudad from casa INNER JOIN ciudad WHERE ciudad.id_ciudad = casa.id_ciudad AND casa.id_ciudad = " + id);
+		 rs= cn.query("Select id_casa, nombre_casa, domicilio_casa, estado, ciudad.id_ciudad, nombre_ciudad from casa INNER JOIN ciudad WHERE ciudad.id_ciudad = casa.id_ciudad AND casa.id_ciudad = " + id);
 		 
 		 while(rs.next())
 		 {
@@ -73,6 +73,7 @@ public class CasasDaoImp implements CasasDao {
 			 C.setId_casa(rs.getInt("id_casa"));
 			 C.setNombre_casa(rs.getString("nombre_casa"));
 			 C.setDireccion(rs.getString("domicilio_casa"));
+			 C.setEstado(rs.getBoolean("estado"));
 			 C.setCiudad(Ci);
 			 
 			 listC.add(C);
@@ -286,7 +287,7 @@ public class CasasDaoImp implements CasasDao {
 		 {
    		 conexion = cn.connect();
 		 rs= cn.query("Select casa.id_casa, nombre_casa, domicilio_casa, ciudad.id_ciudad, nombre_ciudad, casa.capacidad - (Select Count(*) from usuario where usuario.id_casa = casa.id_casa) AS Disponibilidad from casa \r\n" + 
-		 		"INNER JOIN ciudad WHERE ciudad.id_ciudad = casa.id_ciudad;");
+		 		"INNER JOIN ciudad WHERE casa.estado = 1 AND ciudad.id_ciudad = casa.id_ciudad;");
 		 
 		 while(rs.next())
 		 {
@@ -312,5 +313,87 @@ public class CasasDaoImp implements CasasDao {
 			 cn.closeConnection();;
 		 }
     	return listC;
+    }
+    
+    public Casa obtenerEstado(String id)
+    {
+    	ResultSet rs = null;
+    	Connection conexion = null;
+    	Casa c = new Casa();
+    	try
+		 {
+    		 conexion = cn.connect();
+			 rs= cn.query("SELECT estado FROM Casa WHERE Id_Casa = " + id);
+			 while(rs.next())
+			 {
+				 c.setEstado(rs.getBoolean("estado"));
+			 }
+			 
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.closeConnection();;
+		 }
+		 return c;
+    }
+    
+    public void ejecutarSPBajaCasa(String id) throws SQLException { 
+        CallableStatement cst = null;
+        Connection conexion = null; 
+
+        try {
+            conexion = cn.connect(); 
+
+            cst = conexion.prepareCall("CALL BajaCasa(?)");
+            cst.setString(1, id);
+            cst.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; 
+        } finally {
+            try {
+                if (cst != null) {
+                    cst.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void ejecutarSPAltaCasa(String id) throws SQLException { 
+        CallableStatement cst = null;
+        Connection conexion = null; 
+
+        try {
+            conexion = cn.connect(); 
+
+            cst = conexion.prepareCall("CALL AltaCasa(?)");
+            cst.setString(1, id);
+            cst.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; 
+        } finally {
+            try {
+                if (cst != null) {
+                    cst.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

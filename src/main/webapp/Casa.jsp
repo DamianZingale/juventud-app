@@ -28,8 +28,55 @@
 		$('#table_id').DataTable();
 	});
 </script>
-  </head>
-  <body>
+<script type="text/javascript">
+function PopUp(id, ciudad) {
+	  if (confirm("Desea dar baja esta casa?")) {
+		  window.location.href = "ServletCasas?Action=5&Id=" + id.toString() + "&c=" + ciudad.toString();
+	  }
+	  else
+	  {
+		  window.location.href = "ServletCasas?Action=2&Id=" + ciudad.toString();
+	  }
+}
+</script>
+<script type="text/javascript">
+function PopUp2(id, ciudad) {
+	  if (confirm("Desea dar de alta esta casa?")) {
+		  window.location.href = "ServletCasas?Action=6&Id=" + id.toString() + "&c=" + ciudad.toString();
+	  }
+	  else
+	  {
+		  window.location.href = "ServletCasas?Action=2&Id=" + ciudad.toString();
+	  }
+}
+</script>
+</head>
+<body>
+
+  	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="inicioAdmin.jsp">Gestión de estudiantes</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú Principal</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item"><a class="nav-link" href="inicioAdmin.jsp">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="agregarStudent.jsp">Agregar Nuevo Estudiante</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="ServletCasas?Action=1">Casas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="planesEstudio.jsp">Planes de estudio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="informes.jsp">Informes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="ServletestudiantesListado?Action=1">Listado de estudiantes</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
  <%
 	List<EstudianteListado> listE = new ArrayList<EstudianteListado>();
 	List<Casa> listC = new ArrayList<Casa>();
@@ -43,6 +90,43 @@
 	if(request.getAttribute("IdCiudad") != null)
 	{
 		IdC = request.getAttribute("IdCiudad").toString();
+	}
+	
+	String id;
+	String IdCasa = null;
+	if (request.getAttribute("PopUp") != null) {
+		
+		id = request.getAttribute("PopUp").toString();
+		switch (id) {
+		case "1":
+		{
+			if(request.getAttribute("Casa") != null)
+			{
+				IdCasa = request.getAttribute("Casa").toString();
+				%>
+					<script type="text/javascript">
+					PopUp(<%= IdCasa%>,<%= IdC %>);
+					</script>
+				<%
+			}
+			break;
+		}
+		case "2":
+		{
+			if(request.getAttribute("Casa") != null)
+			{
+				IdCasa = request.getAttribute("Casa").toString();
+				%>
+					<script type="text/javascript">
+					PopUp2(<%= IdCasa%>,<%= IdC %>);
+					</script>
+				<%
+			}
+			break;
+		}
+		default:
+			break;
+		}
 	}
 %>
 <div class="container">
@@ -59,18 +143,32 @@
                     <%
                     	for(Casa C : listC)
                     	{
+                    		if(C.isEstado())
+                    		{
+
                     %>
-                        <option value="<%= C.getId_casa() %>"><%= C.getNombre_casa() %> - <%= C.getDireccion() %></option>
+                        		<option value="<%= C.getId_casa() %>"><%= C.getNombre_casa() %> - <%= C.getDireccion() %></option>
                      <%
+                    		}
+                    		else
+                    		{
+                    			%>
+                    			<option value="<%= C.getId_casa() %>"><%= C.getNombre_casa() %> - <%= C.getDireccion() %> (Inactiva)</option>
+                    			<%
+                    		}
                     	}
                      %>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary" name="btnMostrarCasa" value="<%= IdC %>">Mostrar Integrantes</button>
                 <button type="submit" class="btn btn-primary" name="btnAgregarCasa" value="<%= IdC %>">Agregar nueva Casa</button>
-                <button type="submit" class="btn btn-primary" name="btnDarBajaCasa">Dar de baja Casa</button>
-		</form>
-       
+         <div class="form-group"></div>
+         <div class="form-group">
+                <button type="submit" class="btn btn-danger" name="btnDarBajaCasa" value="<%= IdC %>">Dar de baja Casa</button>
+                <button type="submit" class="btn btn-warning" name="btnDarAltaCasa" value="<%= IdC %>">Dar de alta Casa</button>
+		 </div>
+         </form>
+         
                 <table id="table_id" class="table table-hover">
                     <thead class="thead-dark">
                     <tr>
@@ -100,6 +198,7 @@
                     %>
                     </tbody>
                 </table>
+             	<button type="submit" class="btn btn-primary" name="btnVolver" onclick="window.location.href='ServletCasas?Action=1'">Volver a las ciudades</button>
         </div>
     </div>
 </div>
