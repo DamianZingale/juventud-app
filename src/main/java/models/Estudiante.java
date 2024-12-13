@@ -15,14 +15,14 @@ public class Estudiante extends Usuario {
 	
 	private List<Observaciones> observaciones;
 	private Historia_Clinica historia_clinica;
-	private Plan_Estudios plan_estudio;
+	private PlanEstudio plan_estudio;
 	private Casa casa;
 	private Referente referente;
 	
 	//constructor con parametros
 	public Estudiante(String dNI, String nombre, String apellido, String email, String funcion, String userName,
 			String password, Date fecha_nac, String domicilio, String telefono, boolean estado,
-			List<Observaciones> observaciones, Historia_Clinica historia_clinica, Plan_Estudios plan_estudio, Casa casa,
+			List<Observaciones> observaciones, Historia_Clinica historia_clinica, PlanEstudio plan_estudio, Casa casa,
 			Referente referente) {
 		super(dNI, nombre, apellido, email, funcion);
 		this.userName = userName;
@@ -117,11 +117,11 @@ public class Estudiante extends Usuario {
 		this.historia_clinica = historia_clinica;
 	}
 
-	public Plan_Estudios getPlan_estudio() {
+	public PlanEstudio getPlan_estudio() {
 		return plan_estudio;
 	}
 
-	public void setPlan_estudio(Plan_Estudios plan_estudio) {
+	public void setPlan_estudio(PlanEstudio plan_estudio) {
 		this.plan_estudio = plan_estudio;
 	}
 

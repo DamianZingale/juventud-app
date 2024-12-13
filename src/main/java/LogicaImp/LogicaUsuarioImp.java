@@ -14,7 +14,7 @@ import models.Administrador;
 import models.Casa;
 import models.Estudiante;
 import models.EstudianteListado;
-import models.Plan_Estudios;
+import models.PlanEstudio;
 
 public class LogicaUsuarioImp implements LogicaUsuario {
 

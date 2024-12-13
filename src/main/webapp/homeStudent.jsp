@@ -1,3 +1,6 @@
+<%@ page import="models.Estudiante" %>
+<%@ page import="models.PlanEstudio" %>
+
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,8 +54,20 @@
 	<div class="container-fluid p-0">
 		<div class="section-hero mb-4">
 			<div class="text-center">
-				<h1 class="display-4">Homero J. Simpson</h1>
-				<p class="lead">Ingeniería Nuclear</p>
+			<%
+        Estudiante E = (Estudiante) session.getAttribute("usuario");
+        if (E != null) { 
+    %>
+        <h1 class="display-4"><%= E.getNombre() + " " + E.getApellido() %></h1>
+        <p class="lead">Carrera no disponible</p>
+    <%
+        } else { 
+    %>
+        <h1 class="display-4">Nombre no disponible</h1>
+        <p class="lead">Carrera no disponible</p>
+    <%
+        }
+    %>
 			</div>
 		</div>
 

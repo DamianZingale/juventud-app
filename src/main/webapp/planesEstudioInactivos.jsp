@@ -36,7 +36,7 @@
     <!-- Contenedor Principal -->
     <div class="container mt-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2 class="text-primary">Listado de Todos los Planes </h2>
+            <h2 class="text-primary">Listado de Planes Inactivos</h2>
         
 			<form method="get" action="ServletPlanesEstudio">
                 <input type="submit" class="btn btn-success" name="btnFormularioAgregarPlan" value="Agregar Nuevo Plan">
@@ -44,14 +44,14 @@
             </div>
         <!-- Filtro de Planes de Estudio -->
         <div class="button-container">
-            
+           
+    <form method="get" action="ServletPlanesEstudio">
+        <input type="submit" class="btn btn-secondary" name="btnMostrarTodos" value="Todos los Planes" >
+    
+    </form> 
 
     <form method="get" action="ServletPlanesEstudio">
-        <input type="submit" class="btn btn-secondary" name="btnMostrarActivos" value="Planes Activos" >  
-    </form>
-
-    <form method="get" action="ServletPlanesEstudio">
-        <input type="submit" class="btn btn-secondary" name="btnMostrarInactivos" value="Planes Inactivos">                    
+        <input type="submit" class="btn btn-secondary" name="btnMostrarActivos" value="Planes Activos" >                    
     </form>         
 </div>
         <!-- Tabla de Planes -->
@@ -66,13 +66,12 @@
         <table class="table table-bordered table-striped" id="tablaPlanes">
             <thead class="thead-dark">
                 <tr>
-                   
+                    <th scope="col">Seleccionar</th>
                     <th>ID Plan</th>
                     <th>Institución</th>
                     <th>Carrera</th>
                     <th>Resolucion</th>
                     <th>Cantidad de Años</th>
-    
                     
                 </tr>
             </thead>
@@ -81,7 +80,10 @@
                     for (PlanEstudio plan : listaPlanes) {
                 %>
                 <tr>
-                    
+                    <td>
+                        <!-- Radio button para seleccionar un solo plan -->
+                        <input type="radio" name="seleccionarPlan" value="<%= plan.getIdPlan() %>" id="plan_<%= plan.getIdPlan() %>" onclick="setSelectedPlan(<%= plan.getIdPlan() %>)">
+                    </td>
                     <td><%= plan.getIdPlan() %></td>
                     <td><%= plan.getInstitucion() %></td>
                     <td><%= plan.getCarrera() %></td>
@@ -100,12 +102,14 @@
         <p class="text-center">No hay planes de estudio disponibles.</p>
         <% } %>
 
-        <!-- Botones de Acción -->
+                 
+      <!-- Botones de Acción -->
         <div class="d-flex justify-content-end">
-            <form method="post" action="/Juventud-App/ServletPlanesEstudio">
+            <form method="post" action="ServletPlanesEstudio">
                 <!-- Campo oculto para almacenar el ID del plan seleccionado -->
                 <input type="hidden" name="idPlanSeleccionado" id="idPlanSeleccionado"> 
-               
+                              
+                <input type="submit" class="btn btn-warning" name="btnDarAltaPlan" value="Dar de Alta">
             </form>
         </div>
     </div>
@@ -162,50 +166,7 @@
             document.getElementById('idPlanSeleccionado').value = idPlan;
         }
 
-        
-    function highlightButton(clickedButton) {
-        // Obtener todos los botones principales
-        var buttons = document.querySelectorAll('.button-container input[type="submit"]');
-        
-        // Eliminar la clase 'btn-primary' de todos los botones
-        buttons.forEach(function(button) {
-            button.classList.remove('btn-primary');
-            button.classList.add('btn-secondary'); // Restaurar color original
-        });
-
-        // Añadir la clase 'btn-primary' al botón que fue clickeado
-        clickedButton.classList.add('btn-primary');
-        clickedButton.classList.remove('btn-secondary'); // Quitar color original
-
-        // Ocultar todos los botones adicionales inicialmente
-        var botonesAdicionales = document.getElementById('botonesAdicionales');
-        botonesAdicionales.style.display = 'none';
-
-        // Mostrar botones específicos según el botón seleccionado
-        var btnEditarSeleccionado = document.getElementById('btnEditarSeleccionado');
-        var btnEliminarSeleccionado = document.getElementById('btnEliminarSeleccionado');
-        var btnAltaPlan = document.getElementById('btnAltaPlan');
-        
-        if (clickedButton.value === "Todos los Planes") {
-            // Ocultar todos los botones adicionales
-            btnEditarSeleccionado.style.display = 'none';
-            btnEliminarSeleccionado.style.display = 'none';
-            btnAltaPlan.style.display = 'none';
-        } else if (clickedButton.value === "Planes Activos") {
-            // Mostrar solo los botones de "Editar seleccionado" y "Eliminar seleccionado"
-            btnEditarSeleccionado.style.display = 'inline-block';
-            btnEliminarSeleccionado.style.display = 'inline-block';
-            btnAltaPlan.style.display = 'none';
-        } else if (clickedButton.value === "Planes Inactivos") {
-            // Mostrar solo el botón de "Alta de plan"
-            btnEditarSeleccionado.style.display = 'none';
-            btnEliminarSeleccionado.style.display = 'none';
-            btnAltaPlan.style.display = 'inline-block';
-        }
-
-        // Mostrar los botones adicionales
-        botonesAdicionales.style.display = 'block';
-    }
+    
     </script>
 </body>
 

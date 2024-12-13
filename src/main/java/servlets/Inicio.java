@@ -63,11 +63,11 @@ public class Inicio extends HttpServlet {
 	                    dispatcher.forward(request, response);
 	                }
 	            } else {
-	                response.sendRedirect("login.jsp?error=Usuario o contraseña incorrectos");
+	                response.sendRedirect("index.jsp?error=Usuario o contraseña incorrectos");
 	            }
 	        } catch (Exception e) {
 	            e.printStackTrace();
-	            response.sendRedirect("login.jsp?error=Error en el inicio de sesión");
+	            response.sendRedirect("index.jsp?error=Error en el inicio de sesión");
 	        }
 	    }
 	}
