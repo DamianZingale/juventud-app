@@ -45,33 +45,32 @@
     </style>
   </head>
   <body>
-  <form >
+  <form action="Inicio" method="POST">
     <div class="welcome-bar">
       Bienvenido al programa para estudiantes
     </div>
 
     <div class="login-container">
       <h3 class="text-center mb-4">Iniciar Sesión</h3>
-      <form id="loginForm" onsubmit="return validateForm()">
-        <div class="form-group">
-          <label for="username">Usuario</label>
-          <input type="text" id="username" name= "txtUsuario" class="form-control" placeholder="Ingrese su usuario" required>
-          <small class="form-text text-danger" id="usernameError" style="display: none;">El usuario es requerido.</small>
-        </div>
-        <div class="form-group">
-          <label for="password">Contraseña</label>
-          <input type="password" id="password"  name="txtContrasenia" class="form-control" placeholder="Ingrese su contraseña" required>
-          <small class="form-text text-danger" id="passwordError" style="display: none;">La contraseña es requerida.</small>
-        </div>
-        <div class="text-center">
-          <button type="submit" name="btnIngresar" class="btn btn-login btn-block">Ingresar</button>
-        </div>
-        <div class="text-center mt-3">
-          <a href="forgotPassword.jsp" class="text-primary">¿Olvidaste tu contraseña?</a>
-        </div>
-      </form>
-    </div>
-	</form action="Inicio" method="get">
+      <form id="loginForm" action="Inicio" method="post" onsubmit="return validateForm()">
+  <div class="form-group">
+    <label for="username">Usuario</label>
+    <input type="text" id="username" name="txtUsuario" class="form-control" placeholder="Ingrese su usuario" required>
+    <small class="form-text text-danger" id="usernameError" style="display: none;">El usuario es requerido.</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Contraseña</label>
+    <input type="password" id="password" name="txtContrasenia" class="form-control" placeholder="Ingrese su contraseña" required>
+    <small class="form-text text-danger" id="passwordError" style="display: none;">La contraseña es requerida.</small>
+  </div>
+  <div class="text-center">
+    <button type="submit" name="btnIngresar" class="btn btn-login btn-block">Ingresar</button>
+  </div>
+  <div class="text-center mt-3">
+    <a href="RecuperoContrasenia.jsp" class="text-primary">¿Olvidaste tu contraseña?</a>
+  </div>
+  
+</form>
     <footer class="footer text-center">
       <div class="container">
         <div class="row justify-content-around">
