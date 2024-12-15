@@ -24,7 +24,8 @@ public class PlanesEstudioDao {
     }
     private static final String SELECT_PLANES_ACTIVOS_QUERY = "SELECT id_plan, institucion, carrera, resolucion," +
             " cantidad_años FROM db_juventud.plan_estudio WHERE estado = 1";
-
+    
+    //LISTADO DE PLANES DE ESTUDIO ACTIVOS
     public List<PlanEstudio> obtenerPlanesDeEstudioACTIVOS() {
         List<PlanEstudio> planes = new ArrayList<>();
         Connection conn = null;
@@ -62,7 +63,8 @@ public class PlanesEstudioDao {
 
     private static final String SELECT_PLANES_TODOS_QUERY = "SELECT id_plan, institucion, carrera, resolucion," +
             " cantidad_años FROM db_juventud.plan_estudio";
-
+    
+    //TODOS LOS PLANES DE ESTUDIO
     public List<PlanEstudio> obtenerPlanesDeEstudioTODOS() {
         List<PlanEstudio> planes = new ArrayList<>();
         Connection conn = null;
@@ -100,7 +102,8 @@ public class PlanesEstudioDao {
 
     private static final String SELECT_PLANES_INACTIVOS_QUERY = "SELECT id_plan, institucion, carrera, resolucion," +
             " cantidad_años FROM db_juventud.plan_estudio WHERE estado = 0";
-
+    
+    //PLANES DE ESTUDIO INACTIVOS
     public List<PlanEstudio> obtenerPlanesDeEstudioINACTIVOS() {
         List<PlanEstudio> planes = new ArrayList<>();
         Connection conn = null;
@@ -135,7 +138,8 @@ public class PlanesEstudioDao {
         }
         return planes;
     }
-
+    
+    //AGREGAR PLAN DE ESTUDIO
     public int agregarPlan(PlanEstudio plan) {
         String sql = "INSERT INTO db_juventud.plan_estudio (institucion, carrera, resolucion, cantidad_años) VALUES (?, ?, ?, ?)";
         int filas = 0;
@@ -202,7 +206,8 @@ public class PlanesEstudioDao {
         }
         return planEstudio;
     }
-
+    
+    //UPDATE DE PLAN DE ESTUDIO
     public int actualizarPlan(PlanEstudio plan) {
         String sql = "UPDATE db_juventud.plan_estudio SET institucion = ?, carrera = ?, resolucion = ?, cantidad_años = ? WHERE id_plan = ?";
         int filas = 0;
@@ -233,7 +238,8 @@ public class PlanesEstudioDao {
         }
         return filas;
     }
-
+    
+    //ELIMINAR PLAN DE ESTUDIO
     public int eliminarPlan(int idPlan) {
         String sql = "UPDATE db_juventud.plan_estudio SET estado = false WHERE id_plan = ?";
         int filas = 0;
@@ -259,7 +265,8 @@ public class PlanesEstudioDao {
         }
         return filas;
     }
-
+    
+    //ALTA DE PLAN DE ESTUDIOS
     public int darAltaPlan(int idPlan) {
         String sql = "UPDATE db_juventud.plan_estudio SET estado = true WHERE id_plan = ?";
         int filas = 0;
@@ -287,7 +294,8 @@ public class PlanesEstudioDao {
     }
 
     private static final String SELECT_DETALLE_QUERY = "SELECT añoPlan.id AS idAñoPlan, añoPlan.año AS año, MateriaPlan.nombre AS materia, Periodo.nombre AS periodo FROM añoPlan LEFT JOIN MateriaPlan ON añoPlan.id = MateriaPlan.id_añoPlan LEFT JOIN Periodo ON MateriaPlan.periodo = Periodo.id WHERE añoPlan.id_plan = ? ORDER BY añoPlan.año, MateriaPlan.nombre";
-
+    
+    //LISTADO DE MATERIAS POR PLAN DE ESTUDIO
     public List<MateriasPorAño> obtenerMateriasXPlan(int idPlan) {
         List<MateriasPorAño> materias = new ArrayList<>();
         Connection conn = null;

@@ -24,7 +24,7 @@ public class EstudianteDaoImp implements EstudianteDao {
     public EstudianteDaoImp() {
         cn = new ConnectionManager();
     }
-    
+    //ALTA DE ESTUDIANTE
     public void ejecutarSPAltaEstudiante(Estudiante estudiante) throws SQLException { 
         CallableStatement cst = null;
         Connection conexion = null; 
@@ -64,7 +64,7 @@ public class EstudianteDaoImp implements EstudianteDao {
             }
         }
     }
-
+    //COMPROBACION EXISTE DNI
     public boolean existeDni(String dni) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -96,7 +96,7 @@ public class EstudianteDaoImp implements EstudianteDao {
         }
         return false; 
     }
-    
+    //LISTADO DE ESTUDIANTES
     public List<EstudianteListado> obtenerTodos()
     {
     	ResultSet rs = null;
@@ -136,7 +136,7 @@ public class EstudianteDaoImp implements EstudianteDao {
 		 }
 		 return listE;
     }
-    
+    //LISTADO ESTUDIANTES INACTIVOS
     public List<EstudianteListado> obtenerInactivos()
     {
     	ResultSet rs = null;
@@ -177,7 +177,7 @@ public class EstudianteDaoImp implements EstudianteDao {
 		 return listE;
     }
     
-    
+    //OBTENER ESTUDIANTE
     public Estudiante ObtenerEstudiante(String id)
     {
     	ResultSet rs = null;
@@ -204,7 +204,7 @@ public class EstudianteDaoImp implements EstudianteDao {
 		 }
     	return E;
     }
-    
+    //BAJA DE ESTUDIANTE
     public void ejecutarSPBajaEstudiante(String id) throws SQLException { 
         CallableStatement cst = null;
         Connection conexion = null; 
@@ -232,7 +232,7 @@ public class EstudianteDaoImp implements EstudianteDao {
             }
         }
     }
-    
+    //ALTA DE ESTUDIANTE
     public void ejecutarSPAltaEstudiante(String id) throws SQLException { 
         CallableStatement cst = null;
         Connection conexion = null; 
