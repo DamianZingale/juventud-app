@@ -8,7 +8,7 @@ public class Estudiante extends Usuario {
 	private int id_usuario;
 	private String userName;
 	private String password;
-	private Date fecha_nac;
+	private String fecha_nac;
 	private String domicilio;
 	private String telefono;
 	private boolean estado;
@@ -21,7 +21,7 @@ public class Estudiante extends Usuario {
 	
 	//constructor con parametros
 	public Estudiante(String dNI, String nombre, String apellido, String email, String funcion, String userName,
-			String password, Date fecha_nac, String domicilio, String telefono, boolean estado,
+			String password, String fecha_nac, String domicilio, String telefono, boolean estado,
 			List<Observaciones> observaciones, Historia_Clinica historia_clinica, PlanEstudio plan_estudio, Casa casa,
 			Referente referente) {
 		super(dNI, nombre, apellido, email, funcion);
@@ -69,11 +69,11 @@ public class Estudiante extends Usuario {
 		this.password = password;
 	}
 
-	public Date getFecha_nac() {
+	public String getFecha_nac() {
 		return fecha_nac;
 	}
 
-	public void setFecha_nac(Date fecha_nac) {
+	public void setFecha_nac(String fecha_nac) {
 		this.fecha_nac = fecha_nac;
 	}
 

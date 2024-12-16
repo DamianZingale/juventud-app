@@ -128,7 +128,7 @@ function PopUp2(id) {
                     		else
                     		{
                 		%>
-                		<th scope="col"> <button type="submit" class="btn btn-danger" name="btnDarBaja" onclick="PopUp2(<%= Integer.toString(e.getId_usuario())%>)">Dar de alta</button></th>
+                		<th scope="col"> <button type="submit" class="btn btn-success" name="btnDarBaja" onclick="PopUp2(<%= Integer.toString(e.getId_usuario())%>)">Dar de alta</button></th>
                 		<%
                     		}
                 		%>

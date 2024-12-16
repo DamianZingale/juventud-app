@@ -7,6 +7,9 @@ public class EstudianteListado {
 	private String apellido;
 	private String DNI;
 	private String correo;
+	private String domicilio;
+	private String fechaNacimiento;
+	private String casa;
 	private String telefono;
 	private String Carrera;
 	private String Institución;
@@ -15,20 +18,25 @@ public class EstudianteListado {
 	
 	public EstudianteListado() {}
 
-	public EstudianteListado(int id_usuario, String nombre, String apellido, String dNI, String correo, String telefono,
-			String carrera, String institución, String ciudad, boolean estado) {
-		super();
+	public EstudianteListado(int id_usuario, String nombre, String apellido, String dNI, String correo,
+			String domicilio, String fechaNacimiento, String casa, String telefono, String carrera, String institución,
+			String ciudad, boolean estado) {
 		Id_usuario = id_usuario;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		DNI = dNI;
 		this.correo = correo;
+		this.domicilio = domicilio;
+		this.fechaNacimiento = fechaNacimiento;
+		this.casa = casa;
 		this.telefono = telefono;
 		Carrera = carrera;
 		Institución = institución;
 		Ciudad = ciudad;
 		Estado = estado;
 	}
+
+
 
 	public int getId_usuario() {
 		return Id_usuario;
@@ -108,6 +116,30 @@ public class EstudianteListado {
 
 	public void setEstado(boolean estado) {
 		Estado = estado;
+	}
+
+	public String getDomicilio() {
+		return domicilio;
+	}
+
+	public void setDomicilio(String domicilio) {
+		this.domicilio = domicilio;
+	}
+
+	public String getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+
+	public void setFechaNacimiento(String fechaNacimiento) {
+		this.fechaNacimiento = fechaNacimiento;
+	}
+
+	public String getCasa() {
+		return casa;
+	}
+
+	public void setCasa(String casa) {
+		this.casa = casa;
 	}
 
 	

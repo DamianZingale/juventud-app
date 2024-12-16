@@ -10,15 +10,19 @@ import Logica.LogicaUsuario;
 import dao.EstudianteDao;
 import daoImp.DaoUsuario;
 import daoImp.EstudianteDaoImp;
+import daoImp.PlanesEstudioDao;
 import models.Administrador;
 import models.Casa;
 import models.Estudiante;
 import models.EstudianteListado;
+import models.Historia_Clinica;
 import models.PlanEstudio;
+import models.Referente;
 
 public class LogicaUsuarioImp implements LogicaUsuario {
 
 	private EstudianteDao dao = new EstudianteDaoImp();
+	private PlanesEstudioDao daoP = new PlanesEstudioDao();
 	private DaoUsuario U = new DaoUsuario();
 	
 	public ArrayList<EstudianteListado> listarEstudiantes() {
@@ -29,9 +33,19 @@ public class LogicaUsuarioImp implements LogicaUsuario {
 		return (ArrayList<EstudianteListado>) dao.obtenerInactivos();
 	}
 	
-	public Estudiante ObtenerEstudiante(String id)
+	public EstudianteListado ObtenerEstudiante(String id)
 	{
 		return dao.ObtenerEstudiante(id);
+	}
+	
+	public Historia_Clinica ObtenerHistoriaClinica(String id)
+	{
+		return dao.ObtenerHistoriaClinica(id);
+	}
+	
+	public List<Referente> obtenerReferentes(String id)
+	{
+		return (ArrayList<Referente>) dao.obtenerReferentes(id);
 	}
 	
 	public void BajaEstudiante(String id)
@@ -91,5 +105,55 @@ public class LogicaUsuarioImp implements LogicaUsuario {
 		        e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public boolean existeHistoriaClinica(String id) throws SQLException
+	{
+		return dao.existeHistoriaClinica(id);
+	}
+	
+	public void ejecutarSPAgregarHistoriaClinica(Historia_Clinica c, String id)
+	{
+		try {
+			dao.ejecutarSPAgregarHistoriaClinica(c, id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void ejecutarSPActualizarHistoriaClinica(Historia_Clinica c, String id)
+	{
+		try {
+			dao.ejecutarSPActualizarHistoriaClinica(c, id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void ejecutarSPAgregarReferente(Referente r, String id)
+	{
+		try {
+			dao.ejecutarSPAgregarReferente(r, id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void ejecutarSPEliminarReferente(String IdU, String IdR)
+	{
+		try {
+			dao.ejecutarSPEliminarReferente(IdU, IdR);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public ArrayList<PlanEstudio> ObtenerPlanesEstudio()
+	{
+		return (ArrayList<PlanEstudio>) daoP.obtenerPlanesDeEstudioACTIVOS();
 	}
 }

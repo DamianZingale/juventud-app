@@ -165,7 +165,7 @@ function PopUp2(id, ciudad) {
          <div class="form-group"></div>
          <div class="form-group">
                 <button type="submit" class="btn btn-danger" name="btnDarBajaCasa" value="<%= IdC %>">Dar de baja Casa</button>
-                <button type="submit" class="btn btn-warning" name="btnDarAltaCasa" value="<%= IdC %>">Dar de alta Casa</button>
+                <button type="submit" class="btn btn-success" name="btnDarAltaCasa" value="<%= IdC %>">Dar de alta Casa</button>
 		 </div>
          </form>
          
