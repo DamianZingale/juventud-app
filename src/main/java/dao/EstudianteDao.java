@@ -6,7 +6,8 @@ import java.util.List;
 import models.Casa;
 import models.Estudiante;
 import models.EstudianteListado;
-import models.PlanEstudio;
+import models.Historia_Clinica;
+import models.Referente;
 
 public interface EstudianteDao {
     
@@ -18,10 +19,24 @@ public interface EstudianteDao {
     
     public List<EstudianteListado> obtenerInactivos();
     
-    public Estudiante ObtenerEstudiante(String id);
+    public EstudianteListado ObtenerEstudiante(String id);
+    
+    public Historia_Clinica ObtenerHistoriaClinica(String id);
+    
+    public List<Referente> obtenerReferentes(String id);
     
     public void ejecutarSPBajaEstudiante(String id) throws SQLException;
     
     public void ejecutarSPAltaEstudiante(String id) throws SQLException;
+    
+    public boolean existeHistoriaClinica(String id) throws SQLException;
+    
+    public void ejecutarSPAgregarHistoriaClinica(Historia_Clinica c, String id) throws SQLException;
+    
+    public void ejecutarSPActualizarHistoriaClinica(Historia_Clinica c, String id) throws SQLException;
+    
+    public void ejecutarSPAgregarReferente(Referente r, String id) throws SQLException;
+    
+    public void ejecutarSPEliminarReferente(String IdU, String IdR) throws SQLException;
     
 }
