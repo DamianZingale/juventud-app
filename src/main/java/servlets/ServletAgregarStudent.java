@@ -86,7 +86,7 @@ public class ServletAgregarStudent extends HttpServlet {
 					dispatcher.forward(request, response);
 			    } else {
 			        estudianteDao.ejecutarSPAltaEstudiante(e);
-			        RequestDispatcher dispatcher = request.getRequestDispatcher("agregarStudent.jsp");
+			        RequestDispatcher dispatcher = request.getRequestDispatcher("inicioAdmin.jsp");
 					dispatcher.forward(request, response);
 			        System.out.println("Usuario agregado exitosamente");
 			    }
