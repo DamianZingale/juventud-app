@@ -81,14 +81,28 @@ public class ServletAgregarStudent extends HttpServlet {
 		    	// Agrego el estudiante a la base de datos
 			try {
 			    if (estudianteDao.existeDni(e.getDNI())) {
-			        System.out.println("El DNI ya existe.");
+			    	String id = "2";
+			        request.setAttribute("PopUp", id);
+			        List<Casa> listC = new ArrayList<Casa>();
+				 	List<PlanEstudio> listP = new ArrayList<PlanEstudio>();
+				 	listC = logC.ObtenerCasas();
+				 	listP = log.ObtenerPlanesEstudio();
+				 	request.setAttribute("listCasa", listC);	
+				 	request.setAttribute("listPlan", listP);	
 			        RequestDispatcher dispatcher = request.getRequestDispatcher("agregarStudent.jsp");
 					dispatcher.forward(request, response);
 			    } else {
 			        estudianteDao.ejecutarSPAltaEstudiante(e);
-			        RequestDispatcher dispatcher = request.getRequestDispatcher("inicioAdmin.jsp");
+			        String id = "1";
+			        request.setAttribute("PopUp", id);
+			        List<Casa> listC = new ArrayList<Casa>();
+				 	List<PlanEstudio> listP = new ArrayList<PlanEstudio>();
+				 	listC = logC.ObtenerCasas();
+				 	listP = log.ObtenerPlanesEstudio();
+				 	request.setAttribute("listCasa", listC);	
+				 	request.setAttribute("listPlan", listP);	
+			        RequestDispatcher dispatcher = request.getRequestDispatcher("agregarStudent.jsp");
 					dispatcher.forward(request, response);
-			        System.out.println("Usuario agregado exitosamente");
 			    }
 			} catch (SQLException ex) {
 			    System.err.println("Error al verificar el DNI: " + ex.getMessage());

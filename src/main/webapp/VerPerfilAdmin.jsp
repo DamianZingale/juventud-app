@@ -28,7 +28,11 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#table_id').DataTable();
+		$('#table_id').DataTable({
+				"language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                }
+		});
 	});
 </script>
 </head>
@@ -48,10 +52,11 @@
                 <div class="offcanvas-body">
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                         <li class="nav-item"><a class="nav-link" href="inicioAdmin.jsp">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="agregarStudent.jsp">Agregar Nuevo Estudiante</a></li>
-                        <li class="nav-item"><a class="nav-link" href="localidades.jsp">Casas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="planesEstudio.jsp">Planes de estudio</a></li>
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="estudiantesListado.jsp">Listado de estudiantes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="ServletAgregarStudent?Action=1">Agregar Nuevo Estudiante</a></li>
+                        <li class="nav-item"><a class="nav-link" href="ServletCasas?Action=1">Casas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="ServletPlanesEstudio?btnMostrarActivos=Planes+Activos">Planes de estudio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="informes.jsp">Informes</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="ServletestudiantesListado?Action=1">Listado de estudiantes</a></li>
                     </ul>
                 </div>
             </div>
@@ -61,6 +66,7 @@
 	List<Referente> listR = new ArrayList<Referente>();
 	EstudianteListado e = new EstudianteListado();
 	Historia_Clinica c = new Historia_Clinica();
+	String N = "";
 	if (request.getAttribute("listaRef") != null) {
 	listR = (List<Referente>) request.getAttribute("listaRef");
 	}
@@ -122,22 +128,22 @@
                         
                         <div class="mb-3">
                             <label class="form-label">Enfermedades Preexistentes</label>
-                            <input type="text" class="form-control" value="<%= c.getEnfermedades_preexistentes() %>" readonly="readonly">
+                            <input type="text" class="form-control" value="<% if(c.getEnfermedades_preexistentes() != null){ %><%=c.getEnfermedades_preexistentes()%><%; } else{ %><%= N %> <%} %>" readonly="readonly">
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label">Medicaciones</label>
-                            <input type="text" class="form-control" value="<%= c.getMedicaciones() %>" readonly="readonly">
+                            <input type="text" class="form-control" value="<% if(c.getMedicaciones() != null){ %><%=c.getMedicaciones() %><%; } else{ %><%= N %> <%} %>" readonly="readonly">
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label">Operaciones</label>
-                            <input type="text" class="form-control" value="<%= c.getOperaciones() %>" readonly="readonly">
+                            <input type="text" class="form-control" value="<% if(c.getOperaciones() != null){ %><%=c.getOperaciones() %><%; } else{ %><%= N %> <%} %>" readonly="readonly">
                         </div>
                         
                         <div class="mb-3">
                             <label class="form-label">Alergias</label>
-                            <input type="text" class="form-control" value="<%= c.getAlergias() %>" readonly="readonly">
+                            <input type="text" class="form-control" value="<% if(c.getAlergias() != null){ %><%=c.getAlergias() %><%; } else{ %><%= N %> <%} %>" readonly="readonly">
                         </div>
 						
 						<div class="mb-3">

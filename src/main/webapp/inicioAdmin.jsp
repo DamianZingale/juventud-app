@@ -25,7 +25,7 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="inicioAdmin.jsp">Inicio</a></li>
                         <li class="nav-item"><a class="nav-link" href="ServletAgregarStudent?Action=1">Agregar Nuevo Estudiante</a></li>
                         <li class="nav-item"><a class="nav-link" href="ServletCasas?Action=1">Casas</a></li>
-                        <li class="nav-item"><a class="nav-link" href="planesEstudio.jsp">Planes de estudio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="ServletPlanesEstudio?btnMostrarActivos=Planes+Activos">Planes de estudio</a></li>
                         <li class="nav-item"><a class="nav-link" href="informes.jsp">Informes</a></li>
                         <li class="nav-item"><a class="nav-link" href="ServletestudiantesListado?Action=1">Listado de estudiantes</a></li>
                     </ul>
@@ -72,11 +72,12 @@
         	nombreUsuario = admin.getNombre();
         	apellidoUsuario = admin.getApellido();
         	correoUsuario = admin.getEmail();
-    	} else if (usuario instanceof Estudiante) {
-        	Estudiante estudiante = (Estudiante) usuario;
-        	nombreUsuario = estudiante.getNombre();
-        	apellidoUsuario = estudiante.getApellido();
-        	correoUsuario = estudiante.getEmail();
+    	} else {
+    		%>
+    		<script type="text/javascript">
+    			window.location.href = "index.jsp";
+    		</script>
+    		<%
     	}
 		%>
         <p><strong><%= nombreUsuario + " " + apellidoUsuario %></strong></p>

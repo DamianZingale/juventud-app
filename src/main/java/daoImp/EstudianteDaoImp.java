@@ -196,7 +196,7 @@ public class EstudianteDaoImp implements EstudianteDao {
 		 rs= cn.query("Select usuario.nombre, usuario.apellido, usuario.DNI, usuario.fecha_nacimiento, usuario.domicilio, usuario.mail, usuario.telefono, plan_estudio.carrera, plan_estudio.institucion, ciudad.nombre_ciudad, casa.nombre_casa from usuario\r\n" + 
 		 		"inner join plan_estudio \r\n" + 
 		 		"inner join casa  \r\n" + 
-		 		"inner join ciudad WHERE usuario.estado = 1 AND usuario.tipo_usuario = 'Estudiante' AND usuario.id_casa = casa.id_casa AND casa.id_ciudad = ciudad.id_ciudad AND usuario.id_plan = plan_estudio.id_plan AND usuario.id_usuario = " + id);
+		 		"inner join ciudad WHERE usuario.tipo_usuario = 'Estudiante' AND usuario.id_casa = casa.id_casa AND casa.id_ciudad = ciudad.id_ciudad AND usuario.id_plan = plan_estudio.id_plan AND usuario.id_usuario = " + id);
 		 
 		 while(rs.next())
 		 {
