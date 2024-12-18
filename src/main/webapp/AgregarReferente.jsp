@@ -28,7 +28,11 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		$('#table_id').DataTable();
+		$('#table_id').DataTable({
+				"language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json"
+                }
+		});
 	});
 </script>
 </head>
