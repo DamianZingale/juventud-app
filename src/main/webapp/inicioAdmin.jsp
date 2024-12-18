@@ -15,7 +15,7 @@
   <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="inicioAdmin.jsp">Gesti�n de estudiantes</a>
+            <a class="navbar-brand" href="inicioAdmin.jsp">Gestion de estudiantes</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -82,7 +82,7 @@
         <p><strong><%= nombreUsuario + " " + apellidoUsuario %></strong></p>
 		<p title="<%= correoUsuario %>"><%= correoUsuario %></p>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item text-danger" href="LoguinOut">Cerrar sesi�n</a>
+        <a class="dropdown-item text-danger" href="LoguinOut">Cerrar sesion</a>
       </div>
     </div>
   </div>
@@ -105,7 +105,7 @@
     <div class="row justify-content-around">
       <!-- Contact Info -->
       <div class="col-md-4">
-        <h5>Informaci�n de contacto</h5>
+        <h5>Informacion de contacto</h5>
         <address>
           <p>Email: <a href="mailto:example@example.com" class="text-white">example@example.com</a></p>
           <p>Tel�fono: <a href="tel:+1234567890" class="text-white">+54 (2281) 567-890</a></p>
@@ -113,7 +113,7 @@
       </div>
       <!-- Social Media Links -->
       <div class="col-md-4">
-        <h5>S�guenos en nuestras redes sociales</h5>
+        <h5>Siguenos en nuestras redes sociales</h5>
         <nav class="social-icons" aria-label="Social media links">
           <ul class="list-inline">
             <li class="list-inline-item"><a href="https://facebook.com" target="_blank" aria-label="Facebook" class="text-white"> <i class="fab fa-facebook"></i></a></li>
