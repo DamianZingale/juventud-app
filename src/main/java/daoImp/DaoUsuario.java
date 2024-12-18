@@ -59,7 +59,7 @@ public class DaoUsuario {
                     E.setPassword(rs.getString("password"));
                     E.setEmail(rs.getString("mail"));
                     E.setDomicilio(rs.getString("domicilio"));
-                    E.setFecha_nac(rs.getDate("fecha_nacimiento"));
+                    E.setFecha_nac(rs.getDate("fecha_nacimiento").toString());
                     return E;
                 }
             }

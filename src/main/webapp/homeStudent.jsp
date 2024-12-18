@@ -21,7 +21,9 @@
 </head>
 <body>
 	<header>
-
+<%
+Estudiante E = (Estudiante) session.getAttribute("usuario");
+%>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="#">Dashboard Estudiantil</a>
@@ -39,12 +41,10 @@
 					</div>
 					<div class="offcanvas-body">
 						<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-							<li class="nav-item"><a class="nav-link active"
-								aria-current="page" href="homeStudent.jsp">Inicio</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="./perfilStudent.jsp">Perfil</a></li>
-							<li class="nav-item"><a class="nav-link"
-								href="./configuracionStudent.jsp">Configuración</a></li>
+							<li class="nav-item"><a class="nav-link active" aria-current="page" href="homeStudent.jsp">Inicio</a></li>
+							<li class="nav-item"><a class="nav-link" href="./perfilStudent.jsp">Perfil</a></li>
+							<li class="nav-item"><a class="nav-link" href="./configuracionStudent.jsp">Configuración</a></li>
+							<li class="nav-item"><a class="nav-link" href="ServletDatosAdicionales?Action=1&Id=<%= E.getId_usuario() %>">Datos adicionales (Obligatorio)</a></li>
 						</ul>
 					</div>
 				</div>
@@ -55,7 +55,6 @@
 		<div class="section-hero mb-4">
 			<div class="text-center">
 			<%
-        Estudiante E = (Estudiante) session.getAttribute("usuario");
         if (E != null) { 
     %>
         <h1 class="display-4"><%= E.getNombre() + " " + E.getApellido() %></h1>

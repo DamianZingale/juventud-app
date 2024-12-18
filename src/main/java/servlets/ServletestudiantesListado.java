@@ -16,7 +16,8 @@ import LogicaImp.LogicaUsuarioImp;
 import models.Casa;
 import models.Estudiante;
 import models.EstudianteListado;
-import models.PlanEstudio;
+import models.Historia_Clinica;
+import models.Referente;
 
 
 @WebServlet("/ServletestudiantesListado")
@@ -51,10 +52,16 @@ public class ServletestudiantesListado extends HttpServlet {
 				if(request.getParameter("Id")!=null)
 				{
 					String id = request.getParameter("Id").toString();
-					Estudiante e = new Estudiante();
+					EstudianteListado e = new EstudianteListado();
+					Historia_Clinica c = new Historia_Clinica();
+					List<Referente> listR = new ArrayList<Referente>();
 					e = log.ObtenerEstudiante(id);
+					c = log.ObtenerHistoriaClinica(id);
+					listR = log.obtenerReferentes(id);
 					request.setAttribute("Est", e);	
-					RequestDispatcher dispatcher = request.getRequestDispatcher("");
+					request.setAttribute("Hist", c);
+					request.setAttribute("listaRef", listR);
+					RequestDispatcher dispatcher = request.getRequestDispatcher("/VerPerfilAdmin.jsp");
 					dispatcher.forward(request, response);
 				}
 				break;

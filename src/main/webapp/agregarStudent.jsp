@@ -1,3 +1,7 @@
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="models.Casa"%>
+<%@page import="models.PlanEstudio"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,7 +41,16 @@
             </div>
         </div>
     </nav>
-
+ <%
+	List<Casa> listC = new ArrayList<Casa>();
+ 	List<PlanEstudio> listP = new ArrayList<PlanEstudio>();
+	if (request.getAttribute("listCasa") != null) {
+		listC = (List<Casa>) request.getAttribute("listCasa");
+	}
+	if (request.getAttribute("listPlan") != null) {
+		listP = (List<PlanEstudio>) request.getAttribute("listPlan");
+	}
+ %>
 <div class="container py-5">
     <h1 class="text-center mb-5">AGREGAR NUEVO ESTUDIANTE</h1>
 
@@ -51,100 +64,69 @@
                     <form action="ServletAgregarStudent" method="get">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Primer y segundo nombre si corresponde</label>
-                            <input type="text" class="form-control" id="nombres" value="Pepe" required>
+                            <input type="text" class="form-control" name="txtNombres" required>
                         </div>
                         <div class="mb-3">
                             <label for="apellido" class="form-label">Apellido/s</label>
-                            <input type="text" class="form-control" id="apellido" value="Argento" required>
+                            <input type="text" class="form-control" name="txtApellido" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Fecha de nacimiento</label>
+                            <input type="Date" class="form-control" name="txtFecha" required>
                         </div>
                         
                         <div class="mb-3">
                             <label for="DNI" class="form-label">DNI</label>
-                            <input type="text" class="form-control" id="DNI" pattern="\d{2}\.\d{3}\.\d{3}\.\d{2}" value="23.322.332.32" required>
+                            <input type="text" class="form-control" name="txtDNI" required>
                         </div>
 
                         <div class="mb-3">
                             <label for="mail" class="form-label">E-mail</label>
-                            <input type="email" class="form-control" id="mail" value="pepargento@padredefamilia.com" required>
+                            <input type="email" class="form-control" name="txtEmail" required>
                         </div>
-
+                        
                         <div class="mb-3">
-                            <label for="username" class="form-label">Nombre de usuario</label>
-                            <input type="text" class="form-control" id="username" value="PepeArgen" required>
+                            <label class="form-label">Telefono</label>
+                            <input type="text" class="form-control" name="txtTelefono" required>
                         </div>
-
-                        <!-- Dropdown para seleccionar Ciudad -->
+                        
                         <div class="mb-3">
-                            <label for="ciudad" class="form-label">Selecciona una ciudad</label>
-                            <select class="form-control" id="ciudad" onchange="actualizarCasas()" required>
-                                <option value="">Seleccione una ciudad</option>
-                                <option value="Azul">Azul</option>
-                                <option value="Olavarria">Olavarria</option>
-                                <option value="Capital">Capital</option>
-                                <option value="LaPlata">La Plata</option>
-                            </select>
+                            <label class="form-label">Domicilio</label>
+                            <input type="text" class="form-control" name="txtDomicilio" required>
                         </div>
 
                         <!-- Dropdown dependiente de Casas -->
                         <div class="mb-3">
                             <label for="casa" class="form-label">Selecciona una casa</label>
-                            <select class="form-control" id="casa" required>
-                                <option value="">Seleccione una casa</option>
+                            <select class="form-control" name="casa" required>
+                                <%
+			                    	for(Casa C : listC)
+			                    	{
+			                    %>
+			                        	<option value="<%= C.getId_casa() %>"><%= C.getNombre_casa() %> - <%= C.getDireccion() %> (<%= C.getCiudad().getNombre_ciudad() %>)</option>
+			                    <%
+			                    	}
+			                    %>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Selecciona un plan de estudio</label>
+                            <select class="form-control" name="plan" required>
+                                <%
+			                    	for(PlanEstudio P : listP)
+			                    	{
+			                    %>
+			                        	<option value="<%= P.getIdPlan() %>"><%= P.getResolucion() %> - <%= P.getCarrera() %> (<%= P.getInstitucion() %>)</option>
+			                    <%
+			                    	}
+			                    %>
                             </select>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <div class="input-group">
-                                <input type="password" class="form-control" id="password" placeholder="Introduce tu contraseña" required minlength="8"
-                                       pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial.">
-                                <span class="input-group-text" id="togglePassword">
-                                    <i class="fa fa-eye" aria-hidden="true"></i>
-                                </span>
-                            </div>
-                        </div>
-
-                        <script>
-                            // Función para mostrar u ocultar la contraseña
-                            const togglePassword = document.getElementById('togglePassword');
-                            const passwordField = document.getElementById('password');
-
-                            togglePassword.addEventListener('click', function () {
-                                const type = passwordField.type === 'password' ? 'text' : 'password';
-                                passwordField.type = type;
-
-                                this.innerHTML = type === 'password' ? '<i class="fa fa-eye"></i>' : '<i class="fa fa-eye-slash"></i>';
-                            });
-
-                            // Función para actualizar las casas según la ciudad seleccionada
-                            function actualizarCasas() {
-                                var ciudad = document.getElementById("ciudad").value;
-                                var casaSelect = document.getElementById("casa");
-
-                                // Limpiar las opciones previas
-                                casaSelect.innerHTML = "<option value=''>Seleccione una casa</option>";
-
-                                // Opciones para cada ciudad
-                                var casas = {
-                                    "Azul": ["Casa 1", "Casa 2", "Casa 3", "Casa 4"],
-                                    "Olavarria": ["Casa 1", "Casa 2"],
-                                    "Capital": ["Casa 1", "Casa 2", "Casa 3"],
-                                    "LaPlata": ["Casa 1", "Casa 2", "Casa 3", "Casa 4", "Casa 5"]
-                                };
-
-                                
-                                if (casas[ciudad]) {
-                                    casas[ciudad].forEach(function(casa) {
-                                        var option = document.createElement("option");
-                                        option.value = casa;
-                                        option.textContent = casa;
-                                        casaSelect.appendChild(option);
-                                    });
-                                }
-                            }
-                        </script>
 					<div class="d-flex justify-content-end">
-       				 <button type="submit" class="btn btn-success mr-2" name="action" value="add">Agregar Estudiante</button>
+       				 <button type="submit" class="btn btn-success mr-2" name="btnAgregarEstudiante" value="add">Agregar Estudiante</button>
    					 </div>
                     </form>
                 </div>
