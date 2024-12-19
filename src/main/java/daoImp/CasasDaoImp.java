@@ -396,4 +396,41 @@ public class CasasDaoImp implements CasasDao {
             }
         }
     }
+    
+    public List<Casa> ObtenerCasasDisponibles()
+    {
+    	ResultSet rs = null;
+    	Connection conexion = null;
+    	List<Casa> listC = new ArrayList<Casa>();
+    	try
+		 {
+   		 conexion = cn.connect();
+		 rs= cn.query("Select casa.id_casa, nombre_casa, domicilio_casa, ciudad.id_ciudad, nombre_ciudad, casa.capacidad - (Select Count(*) from usuario where usuario.id_casa = casa.id_casa AND usuario.estado = 1) AS Disponibilidad from casa \r\n" + 
+		 		"INNER JOIN ciudad WHERE casa.estado = 1 AND ciudad.id_ciudad = casa.id_ciudad AND casa.capacidad > (Select Count(*) from usuario where usuario.id_casa = casa.id_casa AND usuario.estado = 1);");
+		 
+		 while(rs.next())
+		 {
+			 Casa C = new Casa();
+			 Ciudad Ci = new Ciudad();
+			 Ci.setId_ciudad(rs.getInt("ciudad.id_ciudad"));
+			 Ci.setNombre_ciudad(rs.getString("nombre_ciudad"));
+			 C.setId_casa(rs.getInt("id_casa"));
+			 C.setNombre_casa(rs.getString("nombre_casa"));
+			 C.setDireccion(rs.getString("domicilio_casa"));
+			 C.setCiudad(Ci);
+			 C.setCapacidad(rs.getInt("Disponibilidad"));
+			 
+			 listC.add(C);
+		 }
+		 }
+		 catch(Exception e)
+		 {
+			 e.printStackTrace();
+		 }
+		 finally
+		 {
+			 cn.closeConnection();;
+		 }
+    	return listC;
+    }
 }

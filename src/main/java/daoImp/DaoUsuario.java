@@ -131,4 +131,65 @@ public class DaoUsuario {
     	return password;
     }
 
+    public boolean existePassword(String user, String password) throws SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection conexion = null;
+
+        try {
+            conexion = cn.connect(); 
+
+            String sql = "SELECT COUNT(*) FROM usuario WHERE username = ? AND password = ?";
+            ps = conexion.prepareStatement(sql);
+            ps.setString(1, user);
+            ps.setString(2, password);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                return count > 0; 
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; 
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+                if (conexion != null) conexion.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return false; 
+    }
+    
+    public void ejecutarSPCambiarPassword(String password, String user) throws SQLException { 
+        CallableStatement cst = null;
+        Connection conexion = null; 
+
+        try {
+            conexion = cn.connect(); 
+
+            cst = conexion.prepareCall("CALL CambiarPassword(?, ?)");
+            cst.setString(1, password);
+            cst.setString(2, user);
+            cst.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e; 
+        } finally {
+            try {
+                if (cst != null) {
+                    cst.close();
+                }
+                if (conexion != null) {
+                    conexion.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

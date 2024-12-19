@@ -1,6 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="models.PlanEstudio" %>
+<%@page import="models.Usuario"%>
+<%@page import="models.Administrador"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <!DOCTYPE html>
@@ -31,13 +33,13 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="inicioAdmin.jsp">Gestión de estudiantes</a>
+            <a class="navbar-brand" href="inicioAdmin.jsp">Gestion de estudiantes</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú Principal</h5>
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu Principal</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -53,6 +55,63 @@
             </div>
         </div>
     </nav>
+    
+    	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
+<!-- Zï¿½calo superior -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <!-- Botï¿½n del menï¿½ desplegable a la izquierda -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Texto centrado -->
+    <span class="navbar-text mx-auto text-center">
+      Bienvenido al programa para estudiantes
+    </span>
+
+    <!-- Dropdown de cierre de sesiï¿½n a la derecha -->
+    <div class="dropdown">
+      <!-- Solo imagen dentro del dropdown -->
+      <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <!-- Imagen dentro del dropdown -->
+        <img src="img/avatar.jpg" height="80" width="80" class="rounded-circle" alt="Session">
+      </a><br>
+
+      <!-- Contenido del Dropdown -->
+      <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="userDropdown">
+        <img src="img/avatar.jpg" height="80" width="80" class="rounded-circle mb-2" alt="Session">
+       <%
+    	// Recuperar el usuario desde la sesiï¿½n
+    	Object usuario = session.getAttribute("usuario");
+
+    	String nombreUsuario = "Usuario no autenticado";
+    	String apellidoUsuario= "";
+    	String correoUsuario = "No disponible";
+
+    	if (usuario instanceof Administrador) {
+        	Administrador admin = (Administrador) usuario;
+        	nombreUsuario = admin.getNombre();
+        	apellidoUsuario = admin.getApellido();
+        	correoUsuario = admin.getEmail();
+    	} else {
+    		%>
+    		<script type="text/javascript">
+    			window.location.href = "index.jsp";
+    		</script>
+    		<%
+    	}
+		%>
+        <p><strong><%= nombreUsuario + " " + apellidoUsuario %></strong></p>
+		<p title="<%= correoUsuario %>"><%= correoUsuario %></p>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item text-danger" href="LoguinOut">Cerrar sesion</a>
+      </div>
+    </div>
+  </div>
+</nav>
+    
     <!-- Barra de Bienvenida -->
     <div class="welcome-bar text-center bg-primary text-white py-2">
         <h1>Planes de Estudio</h1>
@@ -136,36 +195,32 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer text-center bg-dark text-white py-3">
-        <div class="container">
-            <div class="row justify-content-around">
-                <!-- Información de Contacto -->
-                <div class="col-md-4">
-                    <h5>Información de Contacto</h5>
-                    <p>Email: <a href="mailto:example@example.com" class="text-white">example@example.com</a></p>
-                    <p>Teléfono: <a href="tel:+1234567890" class="text-white">+54 (2281) 567-890</a></p>
-                </div>
-                <!-- Redes Sociales -->
-                <div class="col-md-4">
-                    <h5>Síguenos en Redes Sociales</h5>
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <a href="https://facebook.com" target="_blank" class="text-white" aria-label="Facebook">
-                                <i class="fab fa-facebook"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="https://instagram.com" target="_blank" class="text-white" aria-label="Instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row justify-content-around">
+            <!-- Contact Info -->
+            <div class="col-md-4">
+                <h5>Información de contacto</h5>
+                <address>
+                    <p>Email: <a href="mailto:direjuventudtapalque@gmail.com">direjuventudtapalque@gmail.com</a></p>
+                    <p>Teléfono: <a href="tel:2281492831">+54 (2281) 492831</a></p>
+                </address>
             </div>
-            <hr class="bg-light">
-            <p>&copy; 2024 Your Company. Todos los derechos reservados.</p>
+            <!-- Social Media Links -->
+            <div class="col-md-4">
+                <h5>Siguenos en nuestras redes sociales</h5>
+                <nav class="social-icons" aria-label="Social media links">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="https://www.facebook.com/direjuventudtapalque/" target="_blank" aria-label="Facebook"> <i class="fab fa-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/juventud.tapalque" target="_blank" aria-label="Instagram"> <i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-    </footer>
+        <hr class="bg-white">
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </div>
+</footer>
 
     <!-- DataTables JS -->
     <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>

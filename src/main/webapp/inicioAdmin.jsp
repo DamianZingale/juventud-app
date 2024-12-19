@@ -15,7 +15,7 @@
   <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="inicioAdmin.jsp">Gestiï¿½n de estudiantes</a>
+            <a class="navbar-brand" href="inicioAdmin.jsp">Gestion de estudiantes</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -83,7 +83,7 @@
         <p><strong><%= nombreUsuario + " " + apellidoUsuario %></strong></p>
 		<p title="<%= correoUsuario %>"><%= correoUsuario %></p>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item text-danger" href="LoguinOut">Cerrar sesiï¿½n</a>
+        <a class="dropdown-item text-danger" href="LoguinOut">Cerrar sesion</a>
       </div>
     </div>
   </div>
@@ -101,31 +101,31 @@
 </div>
 
 <!-- Footer -->
-<footer class="footer text-center bg-primary text-white py-3">
-  <div class="container">
-    <div class="row justify-content-around">
-      <!-- Contact Info -->
-      <div class="col-md-4">
-        <h5>Informaciï¿½n de contacto</h5>
-        <address>
-          <p>Email: <a href="mailto:example@example.com" class="text-white">example@example.com</a></p>
-          <p>Telï¿½fono: <a href="tel:+1234567890" class="text-white">+54 (2281) 567-890</a></p>
-        </address>
-      </div>
-      <!-- Social Media Links -->
-      <div class="col-md-4">
-        <h5>Sï¿½guenos en nuestras redes sociales</h5>
-        <nav class="social-icons" aria-label="Social media links">
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="https://facebook.com" target="_blank" aria-label="Facebook" class="text-white"> <i class="fab fa-facebook"></i></a></li>
-            <li class="list-inline-item"><a href="https://instagram.com" target="_blank" aria-label="Instagram" class="text-white"> <i class="fab fa-instagram"></i></a></li>
-          </ul>
-        </nav>
-      </div>
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row justify-content-around">
+            <!-- Contact Info -->
+            <div class="col-md-4">
+                <h5>Información de contacto</h5>
+                <address>
+                    <p>Email: <a href="mailto:direjuventudtapalque@gmail.com">direjuventudtapalque@gmail.com</a></p>
+                    <p>Teléfono: <a href="tel:2281492831">+54 (2281) 492831</a></p>
+                </address>
+            </div>
+            <!-- Social Media Links -->
+            <div class="col-md-4">
+                <h5>Siguenos en nuestras redes sociales</h5>
+                <nav class="social-icons" aria-label="Social media links">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="https://www.facebook.com/direjuventudtapalque/" target="_blank" aria-label="Facebook"> <i class="fab fa-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/juventud.tapalque" target="_blank" aria-label="Instagram"> <i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <hr class="bg-white">
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
     </div>
-    <hr class="bg-white">
-    <p>2024 Your Company. All rights reserved.</p>
-  </div>
 </footer>
 
 <!-- Bootstrap JS -->

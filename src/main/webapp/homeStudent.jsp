@@ -22,11 +22,23 @@
 <body>
 	<header>
 <%
-Estudiante E = (Estudiante) session.getAttribute("usuario");
+Estudiante E = new Estudiante();
+if(session.getAttribute("usuario") != null)
+{
+	E = (Estudiante) session.getAttribute("usuario");
+}
+else
+{
+	%>
+	<script type="text/javascript">
+		window.location.href = "index.jsp";
+	</script>
+	<%
+}
 %>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">Dashboard Estudiantil</a>
+				<a class="navbar-brand" href="homeStudent.jsp">Dirrecion de Juventud</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
 					aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -35,14 +47,13 @@ Estudiante E = (Estudiante) session.getAttribute("usuario");
 				<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1"
 					id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 					<div class="offcanvas-header">
-						<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+						<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
 						<button type="button" class="btn-close btn-close-white"
 							data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
 					<div class="offcanvas-body">
 						<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 							<li class="nav-item"><a class="nav-link active" aria-current="page" href="homeStudent.jsp">Inicio</a></li>
-							<li class="nav-item"><a class="nav-link" href="./perfilStudent.jsp">Perfil</a></li>
 							<li class="nav-item"><a class="nav-link" href="./configuracionStudent.jsp">Configuración</a></li>
 							<li class="nav-item"><a class="nav-link" href="ServletDatosAdicionales?Action=1&Id=<%= E.getId_usuario() %>">Datos adicionales (Obligatorio)</a></li>
 						</ul>
@@ -50,6 +61,63 @@ Estudiante E = (Estudiante) session.getAttribute("usuario");
 				</div>
 			</div>
 		</nav>
+		
+        	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
+<!-- Zï¿½calo superior -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <!-- Botï¿½n del menï¿½ desplegable a la izquierda -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Texto centrado -->
+    <span class="navbar-text mx-auto text-center">
+      Bienvenido al programa para estudiantes
+    </span>
+
+    <!-- Dropdown de cierre de sesiï¿½n a la derecha -->
+    <div class="dropdown">
+      <!-- Solo imagen dentro del dropdown -->
+      <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <!-- Imagen dentro del dropdown -->
+        <img src="img/avatar.jpg" height="80" width="80" class="rounded-circle" alt="Session">
+      </a><br>
+
+      <!-- Contenido del Dropdown -->
+      <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="userDropdown">
+        <img src="img/avatar.jpg" height="80" width="80" class="rounded-circle mb-2" alt="Session">
+       <%
+    	// Recuperar el usuario desde la sesiï¿½n
+    	Object usuario = session.getAttribute("usuario");
+
+    	String nombreUsuario = "Usuario no autenticado";
+    	String apellidoUsuario= "";
+    	String correoUsuario = "No disponible";
+
+    	if (usuario instanceof Estudiante) {
+        	Estudiante estudiante = (Estudiante) usuario;
+        	nombreUsuario = estudiante.getNombre();
+        	apellidoUsuario = estudiante.getApellido();
+        	correoUsuario = estudiante.getEmail();
+    	} else {
+    		%>
+    		<script type="text/javascript">
+    			window.location.href = "index.jsp";
+    		</script>
+    		<%
+    	}
+		%>
+        <p><strong><%= nombreUsuario + " " + apellidoUsuario %></strong></p>
+		<p title="<%= correoUsuario %>"><%= correoUsuario %></p>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item text-danger" href="LoguinOut">Cerrar sesion</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
 	</header>
 	<div class="container-fluid p-0">
 		<div class="section-hero mb-4">
@@ -58,12 +126,10 @@ Estudiante E = (Estudiante) session.getAttribute("usuario");
         if (E != null) { 
     %>
         <h1 class="display-4"><%= E.getNombre() + " " + E.getApellido() %></h1>
-        <p class="lead">Carrera no disponible</p>
     <%
         } else { 
     %>
         <h1 class="display-4">Nombre no disponible</h1>
-        <p class="lead">Carrera no disponible</p>
     <%
         }
     %>
@@ -230,48 +296,32 @@ Estudiante E = (Estudiante) session.getAttribute("usuario");
 		</div>
 	</div>
 
-	<footer class="footer text-center">
-		<div class="container">
-			<div class="row justify-content-around">
-				<!-- Contact Info -->
-				<div class="col-md-4">
-					<h5>Información de contacto</h5>
-					<address>
-						<p>
-							Email: <a href="mailto:example@example.com">example@example.com</a>
-						</p>
-						<p>
-							Teléfono: <a href="tel:+1234567890">+54 (2281) 567-890</a>
-						</p>
-					</address>
-				</div>
-				<!-- Social Media Links -->
-				<div class="col-md-4">
-					<h5>Siguenos en nuestras redes sociales</h5>
-					<nav class="social-icons" aria-label="Social media links">
-						<ul class="list-inline">
-							<li class="list-inline-item"><a href="https://facebook.com"
-								target="_blank" aria-label="Facebook"> <svg class="icon"
-										xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                        <path
-											d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z" />
-                    </svg>
-							</a></li>
-							<li class="list-inline-item"><a href="https://instagram.com"
-								target="_blank" aria-label="Instagram"> <svg class="icon"
-										xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                        <path
-											d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
-                    </svg>
-							</a></li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-			<hr class="bg-white">
-			<p>&copy; 2024 Your Company. All rights reserved.</p>
-		</div>
-	</footer>
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row justify-content-around">
+            <!-- Contact Info -->
+            <div class="col-md-4">
+                <h5>Información de contacto</h5>
+                <address>
+                    <p>Email: <a href="mailto:direjuventudtapalque@gmail.com">direjuventudtapalque@gmail.com</a></p>
+                    <p>Teléfono: <a href="tel:2281492831">+54 (2281) 492831</a></p>
+                </address>
+            </div>
+            <!-- Social Media Links -->
+            <div class="col-md-4">
+                <h5>Siguenos en nuestras redes sociales</h5>
+                <nav class="social-icons" aria-label="Social media links">
+                    <ul class="list-inline">
+                        <li class="list-inline-item"><a href="https://www.facebook.com/direjuventudtapalque/" target="_blank" aria-label="Facebook"> <i class="fab fa-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/juventud.tapalque" target="_blank" aria-label="Instagram"> <i class="fab fa-instagram"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <hr class="bg-white">
+        <p>&copy; 2024 Your Company. All rights reserved.</p>
+    </div>
+</footer>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

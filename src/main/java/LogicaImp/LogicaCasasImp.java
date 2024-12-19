@@ -74,4 +74,9 @@ public class LogicaCasasImp implements LogicaCasas {
 	{
 		dao.ejecutarSPAltaCasa(id);
 	}
+	
+	public ArrayList<Casa> ObtenerCasasDisponibles()
+	{
+		return (ArrayList<Casa>) dao.ObtenerCasasDisponibles();
+	}
 }

@@ -32,4 +32,6 @@ public interface CasasDao {
 	public void ejecutarSPBajaCasa(String id) throws SQLException;
 	
 	public void ejecutarSPAltaCasa(String id) throws SQLException;
+	
+	public List<Casa> ObtenerCasasDisponibles();
 }

@@ -156,4 +156,14 @@ public class LogicaUsuarioImp implements LogicaUsuario {
 	{
 		return (ArrayList<PlanEstudio>) daoP.obtenerPlanesDeEstudioACTIVOS();
 	}
+	
+	public boolean existePassword(String user, String password) throws SQLException
+	{
+		return U.existePassword(user, password);
+	}
+	
+	public void ejecutarSPCambiarPassword(String password, String user) throws SQLException
+	{
+		U.ejecutarSPCambiarPassword(password, user);
+	}
 }
