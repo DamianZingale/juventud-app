@@ -85,7 +85,7 @@ public class ServletAgregarStudent extends HttpServlet {
 			        request.setAttribute("PopUp", id);
 			        List<Casa> listC = new ArrayList<Casa>();
 				 	List<PlanEstudio> listP = new ArrayList<PlanEstudio>();
-				 	listC = logC.ObtenerCasas();
+				 	listC = logC.ObtenerCasasDisponibles();
 				 	listP = log.ObtenerPlanesEstudio();
 				 	request.setAttribute("listCasa", listC);	
 				 	request.setAttribute("listPlan", listP);	
@@ -97,7 +97,7 @@ public class ServletAgregarStudent extends HttpServlet {
 			        request.setAttribute("PopUp", id);
 			        List<Casa> listC = new ArrayList<Casa>();
 				 	List<PlanEstudio> listP = new ArrayList<PlanEstudio>();
-				 	listC = logC.ObtenerCasas();
+				 	listC = logC.ObtenerCasasDisponibles();
 				 	listP = log.ObtenerPlanesEstudio();
 				 	request.setAttribute("listCasa", listC);	
 				 	request.setAttribute("listPlan", listP);	
@@ -114,7 +114,7 @@ public class ServletAgregarStudent extends HttpServlet {
 			{
 				List<Casa> listC = new ArrayList<Casa>();
 			 	List<PlanEstudio> listP = new ArrayList<PlanEstudio>();
-			 	listC = logC.ObtenerCasas();
+			 	listC = logC.ObtenerCasasDisponibles();
 			 	listP = log.ObtenerPlanesEstudio();
 			 	request.setAttribute("listCasa", listC);	
 			 	request.setAttribute("listPlan", listP);	

@@ -27,6 +27,8 @@ public interface LogicaUsuario {
 	
 	public void AltaEstudiante(String id);
 	
+	public Object ComprobarInicio(String usuario, String contrasenia);
+	
 	public boolean existeHistoriaClinica(String id) throws SQLException;
 	
 	public void ejecutarSPAgregarHistoriaClinica(Historia_Clinica c, String id);
@@ -38,4 +40,8 @@ public interface LogicaUsuario {
 	public void ejecutarSPEliminarReferente(String IdU, String IdR);
 	
 	public ArrayList<PlanEstudio> ObtenerPlanesEstudio();
+	
+	public boolean existePassword(String user, String password) throws SQLException;
+	
+	 public void ejecutarSPCambiarPassword(String password, String user) throws SQLException;
 }

@@ -3,7 +3,6 @@ package LogicaImp;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import Logica.LogicaUsuario;
 import dao.EstudianteDao;
@@ -11,7 +10,6 @@ import daoImp.DaoUsuario;
 import daoImp.EstudianteDaoImp;
 import daoImp.PlanesEstudioDao;
 import models.Administrador;
-import models.Casa;
 import models.Estudiante;
 import models.EstudianteListado;
 import models.Historia_Clinica;
@@ -174,4 +172,14 @@ public class LogicaUsuarioImp implements LogicaUsuario {
 	    return materiasPendientes;
 	}
 
+	
+	public boolean existePassword(String user, String password) throws SQLException
+	{
+		return U.existePassword(user, password);
+	}
+	
+	public void ejecutarSPCambiarPassword(String password, String user) throws SQLException
+	{
+		U.ejecutarSPCambiarPassword(password, user);
+	}
 }

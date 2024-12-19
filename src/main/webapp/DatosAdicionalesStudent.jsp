@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<title>Perfil Estudiante</title>
+<title>Datos adicionales</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="./css/editarPerfilStudent.css">
@@ -27,13 +27,24 @@
 	src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 </head>
 <body>
-
 <%
-Estudiante E = (Estudiante) session.getAttribute("usuario");
+Estudiante E = new Estudiante();
+if(session.getAttribute("usuario") != null)
+{
+	E = (Estudiante) session.getAttribute("usuario");
+}
+else
+{
+	%>
+	<script type="text/javascript">
+		window.location.href = "index.jsp";
+	</script>
+	<%
+}
 %>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
-				<a class="navbar-brand" href="#">Dashboard Estudiantil</a>
+				<a class="navbar-brand" href="homeStudent.jsp">Direccion de Juventud</a>
 				<button class="navbar-toggler" type="button"
 					data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
 					aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
@@ -42,14 +53,13 @@ Estudiante E = (Estudiante) session.getAttribute("usuario");
 				<div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1"
 					id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 					<div class="offcanvas-header">
-						<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menú</h5>
+						<h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
 						<button type="button" class="btn-close btn-close-white"
 							data-bs-dismiss="offcanvas" aria-label="Close"></button>
 					</div>
 					<div class="offcanvas-body">
 						<ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
 							<li class="nav-item"><a class="nav-link" href="homeStudent.jsp">Inicio</a></li>
-							<li class="nav-item"><a class="nav-link" href="./perfilStudent.jsp">Perfil</a></li>
 							<li class="nav-item"><a class="nav-link" href="./configuracionStudent.jsp">Configuración</a></li>
 							<li class="nav-item"><a class="nav-link active" aria-current="page"	href="ServletDatosAdicionales?Action=1&Id=<%= E.getId_usuario() %>">Datos adicionales (Obligatorio)</a></li>
 						</ul>
@@ -57,6 +67,63 @@ Estudiante E = (Estudiante) session.getAttribute("usuario");
 				</div>
 			</div>
 		</nav>
+		
+		        	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
+<!-- Zï¿½calo superior -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <!-- Botï¿½n del menï¿½ desplegable a la izquierda -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menuCollapse" aria-controls="menuCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Texto centrado -->
+    <span class="navbar-text mx-auto text-center">
+      Bienvenido al programa para estudiantes
+    </span>
+
+    <!-- Dropdown de cierre de sesiï¿½n a la derecha -->
+    <div class="dropdown">
+      <!-- Solo imagen dentro del dropdown -->
+      <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <!-- Imagen dentro del dropdown -->
+        <img src="img/avatar.jpg" height="80" width="80" class="rounded-circle" alt="Session">
+      </a><br>
+
+      <!-- Contenido del Dropdown -->
+      <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="userDropdown">
+        <img src="img/avatar.jpg" height="80" width="80" class="rounded-circle mb-2" alt="Session">
+       <%
+    	// Recuperar el usuario desde la sesiï¿½n
+    	Object usuario = session.getAttribute("usuario");
+
+    	String nombreUsuario = "Usuario no autenticado";
+    	String apellidoUsuario= "";
+    	String correoUsuario = "No disponible";
+
+    	if (usuario instanceof Estudiante) {
+        	Estudiante estudiante = (Estudiante) usuario;
+        	nombreUsuario = estudiante.getNombre();
+        	apellidoUsuario = estudiante.getApellido();
+        	correoUsuario = estudiante.getEmail();
+    	} else {
+    		%>
+    		<script type="text/javascript">
+    			window.location.href = "index.jsp";
+    		</script>
+    		<%
+    	}
+		%>
+        <p><strong><%= nombreUsuario + " " + apellidoUsuario %></strong></p>
+		<p title="<%= correoUsuario %>"><%= correoUsuario %></p>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item text-danger" href="LoguinOut">Cerrar sesion</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
 <%
 	Historia_Clinica c = new Historia_Clinica();
 	String N = "";
@@ -113,8 +180,8 @@ Estudiante E = (Estudiante) session.getAttribute("usuario");
             <div class="col-md-4">
                 <h5>Información de contacto</h5>
                 <address>
-                    <p>Email: <a href="mailto:example@example.com">example@example.com</a></p>
-                    <p>Teléfono: <a href="tel:+1234567890">+54 (2281) 567-890</a></p>
+                    <p>Email: <a href="mailto:direjuventudtapalque@gmail.com">direjuventudtapalque@gmail.com</a></p>
+                    <p>Teléfono: <a href="tel:2281492831">+54 (2281) 492831</a></p>
                 </address>
             </div>
             <!-- Social Media Links -->
@@ -122,8 +189,8 @@ Estudiante E = (Estudiante) session.getAttribute("usuario");
                 <h5>Siguenos en nuestras redes sociales</h5>
                 <nav class="social-icons" aria-label="Social media links">
                     <ul class="list-inline">
-                        <li class="list-inline-item"><a href="https://facebook.com" target="_blank" aria-label="Facebook"> <i class="fab fa-facebook"></i></a></li>
-                        <li class="list-inline-item"><a href="https://instagram.com" target="_blank" aria-label="Instagram"> <i class="fab fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.facebook.com/direjuventudtapalque/" target="_blank" aria-label="Facebook"> <i class="fab fa-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="https://www.instagram.com/juventud.tapalque" target="_blank" aria-label="Instagram"> <i class="fab fa-instagram"></i></a></li>
                     </ul>
                 </nav>
             </div>

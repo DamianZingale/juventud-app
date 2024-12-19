@@ -54,10 +54,38 @@ public class ServletDatosAdicionales extends HttpServlet {
 					String id = request.getParameter("Id").toString();
 					Historia_Clinica c = new Historia_Clinica();
 					List<Referente> listR = new ArrayList<Referente>();
-					c.setEnfermedades_preexistentes(request.getParameter("txtEnfermedades").toString());
-					c.setMedicaciones(request.getParameter("txtMedicaciones").toString());
-					c.setOperaciones(request.getParameter("txtOperaciones").toString());
-					c.setAlergias(request.getParameter("txtAlergias").toString());
+					if(request.getParameter("txtEnfermedades").toString() != "")
+					{
+						c.setEnfermedades_preexistentes(request.getParameter("txtEnfermedades").toString());
+					}
+					else
+					{
+						c.setEnfermedades_preexistentes("N/A");
+					}
+					if(request.getParameter("txtMedicaciones").toString() != "")
+					{
+						c.setMedicaciones(request.getParameter("txtMedicaciones").toString());
+					}
+					else
+					{
+						c.setMedicaciones("N/A");
+					}
+					if(request.getParameter("txtOperaciones").toString() != "")
+					{
+						c.setOperaciones(request.getParameter("txtOperaciones").toString());
+					}
+					else
+					{
+						c.setOperaciones("N/A");
+					}
+					if(request.getParameter("txtAlergias").toString() != "")
+					{
+						c.setAlergias(request.getParameter("txtAlergias").toString());
+					}
+					else
+					{
+						c.setAlergias("N/A");
+					}
 					try {
 						if(log.existeHistoriaClinica(id))
 						{
