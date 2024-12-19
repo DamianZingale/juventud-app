@@ -1,8 +1,5 @@
 package models;
 
-import java.sql.Date;
-import java.util.List;
-
 public class Estudiante extends Usuario {
 	
 	private int id_usuario;
@@ -13,7 +10,7 @@ public class Estudiante extends Usuario {
 	private String telefono;
 	private boolean estado;
 	
-	private List<Observaciones> observaciones;
+	
 	private Historia_Clinica historia_clinica;
 	private PlanEstudio plan_estudio;
 	private Casa casa;
@@ -22,7 +19,7 @@ public class Estudiante extends Usuario {
 	//constructor con parametros
 	public Estudiante(String dNI, String nombre, String apellido, String email, String funcion, String userName,
 			String password, String fecha_nac, String domicilio, String telefono, boolean estado,
-			List<Observaciones> observaciones, Historia_Clinica historia_clinica, PlanEstudio plan_estudio, Casa casa,
+			 Historia_Clinica historia_clinica, PlanEstudio plan_estudio, Casa casa,
 			Referente referente) {
 		super(dNI, nombre, apellido, email, funcion);
 		this.userName = userName;
@@ -31,7 +28,7 @@ public class Estudiante extends Usuario {
 		this.domicilio = domicilio;
 		this.telefono = telefono;
 		this.estado = estado;
-		this.observaciones = observaciones;
+		
 		this.historia_clinica = historia_clinica;
 		this.plan_estudio = plan_estudio;
 		this.casa = casa;
@@ -101,13 +98,7 @@ public class Estudiante extends Usuario {
 		this.estado = estado;
 	}
 
-	public List<Observaciones> getObservaciones() {
-		return observaciones;
-	}
-
-	public void setObservaciones(List<Observaciones> observaciones) {
-		this.observaciones = observaciones;
-	}
+	
 
 	public Historia_Clinica getHistoria_clinica() {
 		return historia_clinica;

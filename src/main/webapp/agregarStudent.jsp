@@ -83,7 +83,7 @@ function PopUp2() {
       <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="userDropdown">
         <img src="img/avatar.jpg" height="80" width="80" class="rounded-circle mb-2" alt="Session">
        <%
-    	// Recuperar el usuario desde la sesiï¿½n
+    	// Recuperar el usuario desde la sesion
     	Object usuario = session.getAttribute("usuario");
 
     	String nombreUsuario = "Usuario no autenticado";
@@ -106,11 +106,12 @@ function PopUp2() {
         <p><strong><%= nombreUsuario + " " + apellidoUsuario %></strong></p>
 		<p title="<%= correoUsuario %>"><%= correoUsuario %></p>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item text-danger" href="LoguinOut">Cerrar sesiï¿½n</a>
+        <a class="dropdown-item text-danger" href="LoguinOut">Cerrar sesion</a>
       </div>
     </div>
   </div>
 </nav>
+
 
  <%
  	String id;
@@ -259,6 +260,8 @@ function PopUp2() {
         <p>&copy; 2024 Your Company. All rights reserved.</p>
     </div>
 </footer>
-
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>

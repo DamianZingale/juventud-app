@@ -146,7 +146,7 @@
                 for (MateriasPorAño materia : materiasPorAño) {
         %>
             <tr>
-                <td><%= materia.getAño() %></td>
+                <td><%= materia.getAñoCursada() %></td>
                 <td><%= materia.getMateria() %></td>
                 <td><%= materia.getPeriodo() %></td>
              

@@ -42,7 +42,7 @@
     <div class="container mt-4">
         <h2 class="text-primary">Agregar Nuevo Plan de Estudio</h2>
         
-        <form action="/Juventud-App/ServletPlanesEstudio" method="post">
+        <form action="ServletPlanesEstudio" method="post">
             
             <div class="form-group">
                 <label for="institucion">Institución:</label>

@@ -3,8 +3,7 @@ package LogicaImp;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-
+import java.util.Map;
 
 import Logica.LogicaUsuario;
 import dao.EstudianteDao;
@@ -16,6 +15,7 @@ import models.Casa;
 import models.Estudiante;
 import models.EstudianteListado;
 import models.Historia_Clinica;
+import models.MateriasEstudiante;
 import models.PlanEstudio;
 import models.Referente;
 
@@ -156,4 +156,22 @@ public class LogicaUsuarioImp implements LogicaUsuario {
 	{
 		return (ArrayList<PlanEstudio>) daoP.obtenerPlanesDeEstudioACTIVOS();
 	}
+	
+	public List<MateriasEstudiante> MateriasPendientes(int id) {
+	   
+	    List<MateriasEstudiante> materiasrecibidas = U.obtenerMateriasPendientes(id);
+	    
+	    List<MateriasEstudiante> materiasPendientes = new ArrayList<>();
+
+	   
+	    for (MateriasEstudiante materia : materiasrecibidas) {
+	        if ("pendiente".equalsIgnoreCase(materia.getEstado_materia())) {
+	            materiasPendientes.add(materia);
+	        }
+	    }
+
+	   
+	    return materiasPendientes;
+	}
+
 }

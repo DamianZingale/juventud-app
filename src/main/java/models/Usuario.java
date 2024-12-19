@@ -2,6 +2,7 @@ package models;
 
 public class Usuario {
 	
+	private int id_usuario;
 	private String DNI;
 	private String nombre;
 	private String apellido;
@@ -51,6 +52,13 @@ public class Usuario {
 	}
 	public void setFuncion(String funcion) {
 		this.funcion = funcion;
+	}
+	public int getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_usuario) {
+		this.id_usuario = id_usuario;
 	}
 	
 	//metodo toString

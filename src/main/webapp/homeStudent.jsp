@@ -1,5 +1,9 @@
 <%@ page import="models.Estudiante" %>
 <%@ page import="models.PlanEstudio" %>
+<%@ page import="models.MateriasEstudiante" %>
+
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.Iterator" %>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -129,39 +133,52 @@ Estudiante E = (Estudiante) session.getAttribute("usuario");
 						</table>
 					</div>
 				</div>
-				<div class="tab-pane fade" id="pendientes" role="tabpanel"
-					aria-labelledby="pendientes-tab">
-					<div class="table-responsive">
-						<table class="table table-striped">
-							<thead>
-								<tr>
-									<th>Materia</th>
-									<th>Año</th>
-									<th>Cuatrimestre</th>
-									<th>Acciones</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Álgebra Lineal</td>
-									<td>2023</td>
-									<td>2</td>
-									<td>
-										<button class="btn btn-success btn-sm">Cursar</button>
-									</td>
-								</tr>
-								<tr>
-									<td>Física I</td>
-									<td>2023</td>
-									<td>2</td>
-									<td>
-										<button class="btn btn-success btn-sm">Cursar</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
+				<%@ page import="java.util.Map" %>
+
+
+<div class="tab-pane fade" id="pendientes" role="tabpanel" aria-labelledby="pendientes-tab">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Materia</th>
+                    <th>Año</th>
+                    <th>Cuatrimestre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%
+                    List<MateriasEstudiante> materiasPendientes = (List<MateriasEstudiante>) request.getAttribute("materiasPendientes");
+                    if (materiasPendientes != null && !materiasPendientes.isEmpty()) {
+                        for (MateriasEstudiante materia : materiasPendientes) {
+                %>
+                <tr>
+                    <td><%= materia.getNombre_materia() %></td>
+                    <td><%= materia.getAño_materia() %></td>
+                    <td><%= materia.getCuatrimestre_materia() %></td>
+                    <td>
+                        <button class="btn btn-success btn-sm">Cursar</button>
+                    </td>
+                </tr>
+                <%
+                        }
+                    } else {
+                %>
+                <tr>
+                    <td colspan="4">No hay materias pendientes.</td>
+                </tr>
+                <%
+                    }
+                %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
 				<div class="tab-pane fade" id="completas" role="tabpanel"
 					aria-labelledby="completas-tab">
 					<div class="table-responsive">

@@ -60,7 +60,7 @@
       <div class="dropdown-menu dropdown-menu-right text-center" aria-labelledby="userDropdown">
         <img src="img/avatar.jpg" height="80" width="80" class="rounded-circle mb-2" alt="Session">
        <%
-    	// Recuperar el usuario desde la sesi�n
+    	// Recuperar el usuario desde la sesion
     	Object usuario = session.getAttribute("usuario");
 
     	String nombreUsuario = "Usuario no autenticado";

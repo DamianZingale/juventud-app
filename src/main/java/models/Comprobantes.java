@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class Comprobantes {
 	
-	private int id_comprobante;
+	
 	private String comprobante;
 	private double nota;
 	private Date fecha_comp;
